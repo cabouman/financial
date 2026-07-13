@@ -18,7 +18,7 @@ out = {
                   for a in ASSETS},
     "H": {}
 }
-for H in [5, 10, 20]:
+for H in [1, 5, 10, 20]:
     mom = pd.read_csv(f"results/moments_b_H{H}.csv", index_col=0)
     C = pd.read_csv(f"results/cov_C_H{H}.csv", index_col=0).values
     sd = np.sqrt(np.diag(C))

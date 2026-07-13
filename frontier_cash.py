@@ -14,7 +14,7 @@ import os
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = ["CASH", "FLCOX", "FSKAX", "FXNAX", "FTIHX"]
 
-for H in [5, 10, 20]:
+for H in [1, 5, 10, 20]:
     mom = pd.read_csv(f"results/moments_b_H{H}.csv", index_col=0)
     m = mom["m"].values
     S = pd.read_csv(f"results/cov_S_ordinary_H{H}.csv", index_col=0).values

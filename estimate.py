@@ -26,9 +26,9 @@ rng = np.random.default_rng(20260713)
 
 ASSETS = ["CASH", "FLCOX", "FSKAX", "FXNAX", "FTIHX"]
 RISKY = ["FLCOX", "FSKAX", "FXNAX", "FTIHX"]
-LOOKBACKS = [5, 10, 20]
+LOOKBACKS = [1, 5, 10, 20]
 N_BOOT = 500
-BLOCK = 24  # months
+BLOCK = 24  # months (capped at half the window for short lookbacks)
 
 r = pd.read_csv("data/monthly_log_returns.csv", parse_dates=[0], index_col=0)[ASSETS].dropna()
 T_end = len(r)
@@ -79,8 +79,9 @@ def tangency(m, S, rf):
 
 def block_bootstrap(rw):
     n = len(rw)
-    idx = np.concatenate([(np.arange(BLOCK) + s) % n
-                          for s in rng.integers(0, n, int(np.ceil(n / BLOCK)))])[:n]
+    blk = min(BLOCK, max(6, n // 2))
+    idx = np.concatenate([(np.arange(blk) + s) % n
+                          for s in rng.integers(0, n, int(np.ceil(n / blk)))])[:n]
     return rw[idx]
 
 

@@ -61,8 +61,8 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 .tile .k { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
 .tile .v { font-size: 1.7rem; font-weight: 700; margin-top: 2px; }
 .tile .d { font-size: 0.8rem; color: var(--ink-2); margin-top: 2px; }
-.heatrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
-.allocrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin: 18px 0; }
+.heatrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 14px; }
+.allocrow { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 14px; margin: 18px 0; }
 .alloc { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 16px 18px; }
 .alloc h3 { margin: 0; font-size: 0.95rem; }
 .alloc .tag { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600; }
@@ -81,7 +81,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 
 <main>
 <p class="eyebrow">Portfolio decision aid · Part 2 · Not investment advice</p>
-<h1>Kernel-Weighted Estimates: Trend and Covariance at Three Lookbacks</h1>
+<h1>Kernel-Weighted Estimates: Trend and Covariance at Four Lookbacks</h1>
 <p class="sub">Exponentially-weighted regression of log total-return wealth for five assets — Cash, US-stock, US-value, exUS-stock, and US-bond, defined below — with one-year covariance from overlapping detrended log returns, lognormal moment conversion, tangency portfolios, and block-bootstrap uncertainty.</p>
 <p class="meta">Monthly data through 2026-06 · Yahoo adjusted closes (distributions reinvested) · FRED TB3MS · Computed 2026-07-13 · Code: github.com/cabouman/financial</p>
 
@@ -103,6 +103,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <p>Each lookback H fits a weighted least-squares trend to log wealth with kernel weight <i>q</i> = exp(−age/τ), τ = H/ln 20 — so data H years old gets exactly 5% of today's weight. The "H-year" label describes the kernel's tail, not its information content:</p>
 <div class="chartbox"><div class="legend" id="legend-kernel"></div><div id="chart-kernel"></div></div>
 <div class="tiles">
+  <div class="tile"><div class="k">ESS · H = 1</div><div class="v">7 mo</div><div class="d">essentially the last two quarters — shown as a cautionary contrast</div></div>
   <div class="tile"><div class="k">ESS · H = 5</div><div class="v">36 mo</div><div class="d">effective sample size — dominated by the last ~2 years</div></div>
   <div class="tile"><div class="k">ESS · H = 10</div><div class="v">73 mo</div><div class="d">all real fund data except pre-2016 US-value/exUS-stock splice</div></div>
   <div class="tile"><div class="k">ESS · H = 20</div><div class="v">145 mo</div><div class="d">benchmark-spliced for all four risky funds</div></div>
@@ -119,14 +120,14 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <div class="card tablewrap" id="table-b"></div>
 
 <h2>Correlation structure by lookback</h2>
-<p>One-year log-return correlations from C<sub>H</sub>. The feature that matters for allocation: US-bond's correlation with the stock funds roughly doubles at short lookbacks — the post-2022 inflation regime weakened the stock–bond hedge.</p>
+<p>One-year log-return correlations from C<sub>H</sub>. The feature that matters for allocation: US-bond's correlation with the stock funds roughly doubles between the 20-year and 5-year lookbacks — the post-2022 inflation regime weakened the stock–bond hedge. The H = 1 matrix is best read as estimation noise: with roughly seven effective months of data, artifacts like a −0.92 Cash/US-value "correlation" appear.</p>
 <div class="heatrow" id="heatmaps"></div>
 
 <h2>Tangency portfolios — and why not to trust their composition</h2>
 <p>Maximum-Sharpe portfolios over the four risky funds (long-only, r<sub>f</sub> = the Cash trend), using the lognormal-converted ordinary moments m<sub>H</sub>, S<sub>H</sub>. Under two-fund separation, Cash then sets your position along the capital-market line.</p>
 <div class="allocrow" id="alloc-cards"></div>
 <div class="card tablewrap" id="table-boot"></div>
-<div class="callout"><p><b>The bootstrap punchline:</b> the 10–90% interval for the US-stock weight spans 0% to 100% at every lookback. The tangency <i>composition</i> is statistically unidentified — the stock-fund trend standard errors (±3–8%/yr) exceed the spreads between the stock funds' estimated trends at every H. The point estimates concentrate in US-stock for the same reason the first-pass optimizer did: noise amplification, now quantified.</p></div>
+<div class="callout"><p><b>The bootstrap punchline:</b> the 10–90% interval for the US-stock weight spans 0% to 100% at every multi-year lookback, and the H = 1 intervals are nearly as wide for every stock fund. The tangency <i>composition</i> is statistically unidentified — the stock-fund trend standard errors (±3–9%/yr) exceed the spreads between the stock funds' estimated trends at every H. The H = 1 card is the reductio: seven effective months of data yield a "Sharpe 4.98" portfolio built on spurious negative correlations — exactly what an optimizer emits when fed estimation noise. The point estimates concentrate in whatever recently won for the same reason the first-pass optimizer did: noise amplification, now quantified.</p></div>
 
 <h2>Adding cash as an investable asset: money market vs. bonds</h2>
 <p>The tangency step above treats cash only as the risk-free rate, which hides a question the recent data answers loudly: <b>as the defensive asset, should the low-risk sleeve be Cash or US-bond?</b> The kernel-weighted trends say cash beat aggregate bonds at the 5- and 10-year lookbacks — with a fifth of the volatility:</p>
@@ -134,6 +135,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <table>
 <thead><tr><th>Lookback</th><th>Cash trend b</th><th>US-bond trend b</th><th>Cash vol</th><th>US-bond vol</th><th>Defensive winner</th></tr></thead>
 <tbody>
+<tr><td>H = 1</td><td>+3.6% (±0.2)</td><td>+2.0% (±1.6)</td><td>0.3%</td><td>2.9%</td><td style="text-align:left;font-weight:600">Cash — higher return, lower risk</td></tr>
 <tr><td>H = 5</td><td>+4.2% (±1.2)</td><td>+2.9% (±3.3)</td><td>1.2%</td><td>4.8%</td><td style="text-align:left;font-weight:600">Cash — higher return, lower risk</td></tr>
 <tr><td>H = 10</td><td>+2.8% (±0.7)</td><td>+1.0% (±2.4)</td><td>1.8%</td><td>5.8%</td><td style="text-align:left;font-weight:600">Cash — higher return, lower risk</td></tr>
 <tr><td>H = 20</td><td>+1.5% (±0.6)</td><td>+2.1% (±1.3)</td><td>2.1%</td><td>5.5%</td><td style="text-align:left;font-weight:600">US-bond — small term premium returns</td></tr>
@@ -142,7 +144,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 </div>
 <p>To make the competition explicit, here is the full five-asset efficient frontier with CASH investable: at each target risk level, the long-only portfolio maximizing expected one-year return. Read each panel left (conservative) to right (aggressive) and watch who supplies the defensive sleeve:</p>
 <div class="chartbox"><div class="legend" id="legend-glide"></div><div id="chart-glide"></div></div>
-<figcaption>Optimal weights vs. target one-year SD (lognormal ordinary moments m<sub>H</sub>, S<sub>H</sub>). At H = 5 and H = 10, US-bond's maximum weight anywhere on the frontier is 0.0% — cash replaces bonds entirely. At H = 20 bonds reclaim a 6% sliver at the lowest-risk corner. Hover for exact weights.</figcaption>
+<figcaption>Optimal weights vs. target one-year SD (lognormal ordinary moments m<sub>H</sub>, S<sub>H</sub>; note each panel's risk axis has its own range). At H = 1, 5, and 10, US-bond's maximum weight anywhere on the frontier is 0.0% — cash replaces bonds entirely. At H = 20 bonds reclaim a 6% sliver at the lowest-risk corner. Hover for exact weights.</figcaption>
 <div class="callout"><p><b>Interpretation, with the usual honesty:</b> the recent dominance of cash reflects the 2022–2023 rate shock — bonds took a −17% drawdown while money-market yields rose to ~5%, and the exponential kernel weights that period heavily. The H = 20 panel shows the long-run pattern (a small term premium) reasserting itself. Whether the next decade looks like the last 5 years (bonds still expensive relative to cash) or the last 20 (term premium returns) is exactly the kind of expected-return question this data cannot settle; what the analysis does establish is that the case for US-bond over Cash rests on that belief, not on the recent record.</p></div>
 
 <h2>Caveats</h2>
@@ -158,7 +160,7 @@ const ASSETS = ['CASH', 'FLCOX', 'FSKAX', 'FXNAX', 'FTIHX'];
 const RISKY = ['FLCOX', 'FSKAX', 'FXNAX', 'FTIHX'];
 const seriesColor = { CASH: 'var(--s-cash)', FLCOX: 'var(--s-flcox)', FSKAX: 'var(--s-fskax)', FXNAX: 'var(--s-fxnax)', FTIHX: 'var(--s-ftihx)' };
 const NAME = { CASH: 'Cash', FLCOX: 'US-value', FSKAX: 'US-stock', FXNAX: 'US-bond', FTIHX: 'exUS-stock' };
-const SPLICED = { 5: [], 10: ['FLCOX', 'FTIHX'], 20: ['FLCOX', 'FSKAX', 'FXNAX', 'FTIHX'] };
+const SPLICED = { 1: [], 5: [], 10: ['FLCOX', 'FTIHX'], 20: ['FLCOX', 'FSKAX', 'FXNAX', 'FTIHX'] };
 const tip = document.getElementById('tip');
 function showTip(evt, html) {
   tip.innerHTML = html; tip.style.display = 'block';
@@ -192,21 +194,22 @@ const pct = v => (v * 100).toFixed(1) + '%';
   for (let a = 0; a <= 20; a += 5)
     el('text', { x: X(a), y: H - 18, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = a;
   el('text', { x: (m.l + W - m.r) / 2, y: H - 2, 'text-anchor': 'middle', 'font-size': 11.5, fill: 'var(--ink-2)' }, svg).textContent = 'Age of observation (years) →';
-  const shades = { 5: 'var(--ink)', 10: 'var(--ink-2)', 20: 'var(--muted)' };
-  for (const Hh of [5, 10, 20]) {
+  const shades = { 1: 'var(--ink)', 5: 'var(--ink-2)', 10: 'var(--muted)', 20: 'var(--muted)' };
+  const dashes = { 20: '6 5' };
+  for (const Hh of [1, 5, 10, 20]) {
     const tau = Hh / Math.log(20);
     let d = '';
     for (let a = 0; a <= Math.min(Hh, x1); a += 0.1)
       d += (d ? 'L' : 'M') + X(a).toFixed(1) + ',' + Y(Math.exp(-a / tau)).toFixed(1);
     d += 'L' + X(Math.min(Hh, x1)).toFixed(1) + ',' + Y(0).toFixed(1);  // truncation drop
-    el('path', { d, fill: 'none', stroke: shades[Hh], 'stroke-width': 2 }, svg);
+    el('path', { d, fill: 'none', stroke: shades[Hh], 'stroke-width': 2, 'stroke-dasharray': dashes[Hh] || '' }, svg);
     const c = el('circle', { cx: X(Hh), cy: Y(0.05), r: 4, fill: shades[Hh] }, svg);
     c.addEventListener('mousemove', evt => showTip(evt, `<b>H = ${Hh}</b>: age-${Hh} data has 5% weight<br>τ = ${tau.toFixed(2)} yr`));
     c.addEventListener('mouseleave', hideTip);
     el('text', { x: X(Hh) + 7, y: Y(0.05) - 7, 'font-size': 11, 'font-weight': 600, fill: shades[Hh] }, svg).textContent = 'H=' + Hh;
   }
   document.getElementById('chart-kernel').appendChild(svg);
-  legend('legend-kernel', [['H = 5', 'var(--ink)'], ['H = 10', 'var(--ink-2)'], ['H = 20', 'var(--muted)']]);
+  legend('legend-kernel', [['H = 1', 'var(--ink)'], ['H = 5', 'var(--ink-2)'], ['H = 10', 'var(--muted)'], ['H = 20 (dashed)', 'var(--muted)']]);
 })();
 
 /* ---------- Log wealth ---------- */
@@ -258,11 +261,11 @@ const pct = v => (v * 100).toFixed(1) + '%';
 /* ---------- Slope dot-whisker ---------- */
 (function () {
   const W = 840, rowH = 20, gap = 4, agap = 16, m = { l: 120, r: 20, t: 30, b: 36 };
-  const H = m.t + ASSETS.length * (3 * (rowH + gap) + agap) + m.b;
-  const x0 = -0.02, x1 = 0.26;
+  const H = m.t + ASSETS.length * (4 * (rowH + gap) + agap) + m.b;
+  const x0 = -0.02, x1 = 0.37;
   const X = v => m.l + (W - m.l - m.r) * (v - x0) / (x1 - x0);
   const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Trend estimates with bootstrap standard errors by asset and lookback' });
-  for (let v = 0; v <= 0.25; v += 0.05) {
+  for (let v = 0; v <= 0.35; v += 0.05) {
     el('line', { x1: X(v), x2: X(v), y1: m.t - 8, y2: H - m.b + 4, stroke: v === 0 ? 'var(--baseline)' : 'var(--grid)' }, svg);
     el('text', { x: X(v), y: H - m.b + 18, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = (v * 100).toFixed(0) + '%';
   }
@@ -271,7 +274,7 @@ const pct = v => (v * 100).toFixed(1) + '%';
   for (const a of ASSETS) {
     const ai = ASSETS.indexOf(a);
     el('text', { x: 8, y: y + rowH * 1.8, 'font-size': 12.5, 'font-weight': 700, fill: seriesColor[a] }, svg).textContent = NAME[a];
-    for (const Hh of [5, 10, 20]) {
+    for (const Hh of [1, 5, 10, 20]) {
       const d = DATA.H[String(Hh)], b = d.b[ai], se = d.se[ai];
       const cy = y + rowH / 2;
       el('text', { x: m.l - 10, y: cy + 4, 'text-anchor': 'end', 'font-size': 10.5, fill: 'var(--muted)' }, svg).textContent = 'H=' + Hh;
@@ -293,11 +296,11 @@ const pct = v => (v * 100).toFixed(1) + '%';
 /* ---------- b table ---------- */
 (function () {
   let html = '<table><thead><tr><th>Asset</th>';
-  for (const Hh of [5, 10, 20]) html += `<th>b (H=${Hh})</th><th>SE</th><th>ordinary</th>`;
+  for (const Hh of [1, 5, 10, 20]) html += `<th>b (H=${Hh})</th><th>SE</th><th>ordinary</th>`;
   html += '</tr></thead><tbody>';
   ASSETS.forEach((a, ai) => {
     html += `<tr><td><span class="dot" style="background:${seriesColor[a]}"></span>${NAME[a]} <span style="color:var(--muted);font-weight:400">${a === 'CASH' ? '' : a}</span></td>`;
-    for (const Hh of [5, 10, 20]) {
+    for (const Hh of [1, 5, 10, 20]) {
       const d = DATA.H[String(Hh)];
       html += `<td>${(d.b[ai] >= 0 ? '+' : '') + d.b[ai].toFixed(3)}</td><td>±${d.se[ai].toFixed(3)}</td><td>${pct(Math.exp(d.b[ai]) - 1)}</td>`;
     }
@@ -310,7 +313,7 @@ const pct = v => (v * 100).toFixed(1) + '%';
 (function () {
   const RAMP = ['#cde2fb', '#b7d3f6', '#9ec5f4', '#86b6ef', '#6da7ec', '#5598e7', '#3987e5', '#2a78d6', '#256abf', '#1c5cab', '#184f95', '#104281', '#0d366b'];
   const wrap = document.getElementById('heatmaps');
-  for (const Hh of [5, 10, 20]) {
+  for (const Hh of [1, 5, 10, 20]) {
     const corr = DATA.H[String(Hh)].corr;
     const cell = 40, padL = 78, padT = 64, W = padL + 5 * cell + 42, Hp = padT + 5 * cell + 6;
     const box = document.createElement('div'); box.className = 'chartbox'; box.style.margin = '0';
@@ -335,9 +338,9 @@ const pct = v => (v * 100).toFixed(1) + '%';
 
 /* ---------- Tangency cards + bootstrap table ---------- */
 (function () {
-  const stats = { 5: { er: 0.1769, sd: 0.1173, sh: 1.14, rf: 0.0432 }, 10: { er: 0.1511, sd: 0.1427, sh: 0.86, rf: 0.0280 }, 20: { er: 0.1389, sd: 0.1563, sh: 0.80, rf: 0.0146 } };
+  const stats = { 1: { er: 0.2744, sd: 0.0477, sh: 4.98, rf: 0.0366 }, 5: { er: 0.1769, sd: 0.1173, sh: 1.14, rf: 0.0432 }, 10: { er: 0.1511, sd: 0.1427, sh: 0.86, rf: 0.0280 }, 20: { er: 0.1389, sd: 0.1563, sh: 0.80, rf: 0.0146 } };
   const wrap = document.getElementById('alloc-cards');
-  for (const Hh of [5, 10, 20]) {
+  for (const Hh of [1, 5, 10, 20]) {
     const t = DATA.H[String(Hh)].tangency, s = stats[Hh];
     const bar = RISKY.map(f => t[f].w > 0.001 ? `<div style="width:${t[f].w * 100}%;background:${seriesColor[f]}" title="${NAME[f]} ${pct(t[f].w)}"></div>` : '').join('');
     const list = RISKY.map(f => t[f].w > 0.001 ? `<b>${NAME[f]}</b> ${(t[f].w * 100).toFixed(1)}%` : '').filter(Boolean).join(' · ');
@@ -348,11 +351,11 @@ const pct = v => (v * 100).toFixed(1) + '%';
     wrap.appendChild(d);
   }
   let html = '<table><thead><tr><th>Fund</th>';
-  for (const Hh of [5, 10, 20]) html += `<th>w (H=${Hh})</th><th>bootstrap 10–90%</th>`;
+  for (const Hh of [1, 5, 10, 20]) html += `<th>w (H=${Hh})</th><th>bootstrap 10–90%</th>`;
   html += '</tr></thead><tbody>';
   for (const f of RISKY) {
     html += `<tr><td><span class="dot" style="background:${seriesColor[f]}"></span>${NAME[f]} <span style="color:var(--muted);font-weight:400">${f}</span></td>`;
-    for (const Hh of [5, 10, 20]) {
+    for (const Hh of [1, 5, 10, 20]) {
       const t = DATA.H[String(Hh)].tangency[f];
       html += `<td>${(t.w * 100).toFixed(1)}%</td><td style="color:var(--ink-2)">[${(t.q10 * 100).toFixed(0)}%, ${(t.q90 * 100).toFixed(0)}%]</td>`;
     }
@@ -366,9 +369,9 @@ const pct = v => (v * 100).toFixed(1) + '%';
   const ORDER = ['CASH', 'FXNAX', 'FSKAX', 'FLCOX', 'FTIHX'];  // defensive -> aggressive stack
   const wrap = document.getElementById('chart-glide');
   const row = document.createElement('div');
-  row.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px';
+  row.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:10px';
   wrap.appendChild(row);
-  for (const Hh of [5, 10, 20]) {
+  for (const Hh of [1, 5, 10, 20]) {
     const F = DATA.H[String(Hh)].frontier, n = F.sd.length;
     const W = 280, Hp = 240, m = { t: 26, r: 10, b: 34, l: 38 };
     const x0 = F.sd[0], x1 = F.sd[n - 1];
