@@ -115,6 +115,7 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <figcaption>Log total-return wealth, June 1996 = 0. A straight line on this plot is a constant compound growth rate; the WLS slope b is the kernel-weighted version of that line's gradient. End labels show the cumulative multiple.</figcaption>
 
 <h2>Trend estimates b<sub>H</sub> — the point estimates and their error bars</h2>
+<p>The error bars come from a <b>block bootstrap</b>, a standard way of asking: how different would this estimate be if history had come out slightly differently? We rebuild 500 synthetic histories by stitching together randomly chosen 24-month blocks of the real monthly data (blocks, rather than single months, preserve the short-range time correlation), re-run the entire estimation on each one, and take the spread of the 500 answers. That spread is the standard error (SE); a ±1 SE whisker brackets roughly the middle two-thirds of the reruns.</p>
 <div class="chartbox"><div class="legend" id="legend-slope"></div><div id="chart-slope"></div></div>
 <figcaption>Annual continuously-compounded trend, whiskers = ±1 bootstrap SE (circular 24-month blocks, 500 replicates). Open markers indicate estimates whose window includes benchmark-proxy data. The equity funds' whiskers overlap heavily at every lookback — the data does not resolve their ranking.</figcaption>
 <div class="card tablewrap" id="table-b"></div>
@@ -124,7 +125,8 @@ svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
 <div class="heatrow" id="heatmaps"></div>
 
 <h2>Tangency portfolios — and why not to trust their composition</h2>
-<p>Maximum-Sharpe portfolios over the four risky funds (long-only, r<sub>f</sub> = the Cash trend), using the lognormal-converted ordinary moments m<sub>H</sub>, S<sub>H</sub>. Under two-fund separation, Cash then sets your position along the capital-market line.</p>
+<p>The <b>tangency portfolio</b> is the mix of the four risky funds with the highest Sharpe ratio — expected return in excess of cash, per unit of risk. <b>Cash is deliberately absent from this section</b>, for a classical reason called two-fund separation: every efficient portfolio can be built by blending just two ingredients, cash and the tangency portfolio. Statistics can only determine the best <i>risky</i> mix; how much cash to blend with it sets your overall risk level, and that is a personal choice rather than an estimation problem. (The next section drops this convention and lets cash compete as an ordinary asset.)</p>
+<p>In the cards and table below, <b>w is each fund's Sharpe-maximizing weight within that risky mix</b>, computed long-only from the lognormal-converted one-year moments m<sub>H</sub>, S<sub>H</sub> at each lookback. The bracketed <b>bootstrap 10–90%</b> range shows where that weight landed in the middle 80% of the 500 resampled histories — a direct read on how much the optimal weights can be trusted.</p>
 <div class="allocrow" id="alloc-cards"></div>
 <div class="card tablewrap" id="table-boot"></div>
 <div class="callout"><p><b>The bootstrap punchline:</b> the 10–90% interval for the US-stock weight spans 0% to 100% at every multi-year lookback, and the H = 1 intervals are nearly as wide for every stock fund. The tangency <i>composition</i> is statistically unidentified — the stock-fund trend standard errors (±3–9%/yr) exceed the spreads between the stock funds' estimated trends at every H. The H = 1 card is the reductio: seven effective months of data yield a "Sharpe 4.98" portfolio built on spurious negative correlations — exactly what an optimizer emits when fed estimation noise. The point estimates concentrate in whatever recently won for the same reason the first-pass optimizer did: noise amplification, now quantified.</p></div>
@@ -351,7 +353,7 @@ const pct = v => (v * 100).toFixed(1) + '%';
     wrap.appendChild(d);
   }
   let html = '<table><thead><tr><th>Fund</th>';
-  for (const Hh of [1, 5, 10, 20]) html += `<th>w (H=${Hh})</th><th>bootstrap 10–90%</th>`;
+  for (const Hh of [1, 5, 10, 20]) html += `<th>optimal w (H=${Hh})</th><th>bootstrap 10–90%</th>`;
   html += '</tr></thead><tbody>';
   for (const f of RISKY) {
     html += `<tr><td><span class="dot" style="background:${seriesColor[f]}"></span>${NAME[f]} <span style="color:var(--muted);font-weight:400">${f}</span></td>`;
