@@ -1,0 +1,104 @@
+
+==============================================================================
+LOOKBACK H = 5 years   (tau = 1.67 yr, ESS = 36 months, all real fund data)
+
+b_5 — annual log-return trend (WLS slope), with bootstrap SE:
+  CASH   +0.0423  (SE 0.0115)   -> ordinary +4.32%
+  FLCOX  +0.1283  (SE 0.0653)   -> ordinary +13.69%
+  FSKAX  +0.1589  (SE 0.0713)   -> ordinary +17.22%
+  FXNAX  +0.0291  (SE 0.0334)   -> ordinary +2.95%
+  FTIHX  +0.1427  (SE 0.0819)   -> ordinary +15.34%
+
+C_5 — one-year log-return covariance (x1e4, i.e. %^2 units):
+       CASH  FLCOX  FSKAX  FXNAX  FTIHX
+CASH    1.3    1.3    4.9    3.4    3.8
+FLCOX   1.3   74.0   76.2   23.3   74.1
+FSKAX   4.9   76.2  100.9   33.5   84.2
+FXNAX   3.4   23.3   33.5   22.9   45.3
+FTIHX   3.8   74.1   84.2   45.3  149.3
+
+Correlations:
+       CASH  FLCOX  FSKAX  FXNAX  FTIHX
+CASH   1.00   0.13   0.42   0.61   0.27
+FLCOX  0.13   1.00   0.88   0.57   0.70
+FSKAX  0.42   0.88   1.00   0.70   0.69
+FXNAX  0.61   0.57   0.70   1.00   0.77
+FTIHX  0.27   0.70   0.69   0.77   1.00
+
+Ordinary one-year moments: m = [+4.32% +14.11% +17.81% +3.07% +16.21%], rf = 4.32%
+Tangency portfolio (risky funds, long-only):
+  FLCOX    0.0%   bootstrap 10-90%: [ 0.0%, 100.0%]
+  FSKAX   92.5%   bootstrap 10-90%: [ 0.0%, 100.0%]
+  FXNAX    0.0%   bootstrap 10-90%: [ 0.0%, 19.4%]
+  FTIHX    7.5%   bootstrap 10-90%: [ 0.0%, 43.7%]
+  E[R] = 17.69%, SD = 11.73%, Sharpe = 1.14
+
+==============================================================================
+LOOKBACK H = 10 years   (tau = 3.34 yr, ESS = 73 months, SPLICED: FLCOX,FTIHX)
+
+b_10 — annual log-return trend (WLS slope), with bootstrap SE:
+  CASH   +0.0276  (SE 0.0074)   -> ordinary +2.80%
+  FLCOX  +0.1026  (SE 0.0312)   -> ordinary +10.80%
+  FSKAX  +0.1331  (SE 0.0372)   -> ordinary +14.24%
+  FXNAX  +0.0103  (SE 0.0237)   -> ordinary +1.04%
+  FTIHX  +0.0809  (SE 0.0419)   -> ordinary +8.43%
+
+C_10 — one-year log-return covariance (x1e4, i.e. %^2 units):
+       CASH  FLCOX  FSKAX  FXNAX  FTIHX
+CASH    3.3    3.0    6.1    4.7    9.4
+FLCOX   3.0  116.3  117.5   23.5  122.2
+FSKAX   6.1  117.5  152.6   43.1  144.1
+FXNAX   4.7   23.5   43.1   33.7   52.5
+FTIHX   9.4  122.2  144.1   52.5  208.8
+
+Correlations:
+       CASH  FLCOX  FSKAX  FXNAX  FTIHX
+CASH   1.00   0.15   0.27   0.45   0.36
+FLCOX  0.15   1.00   0.88   0.38   0.78
+FSKAX  0.27   0.88   1.00   0.60   0.81
+FXNAX  0.45   0.38   0.60   1.00   0.63
+FTIHX  0.36   0.78   0.81   0.63   1.00
+
+Ordinary one-year moments: m = [+2.82% +11.45% +15.11% +1.21% +9.57%], rf = 2.80%
+Tangency portfolio (risky funds, long-only):
+  FLCOX    0.0%   bootstrap 10-90%: [ 0.0%, 100.0%]
+  FSKAX  100.0%   bootstrap 10-90%: [ 0.0%, 100.0%]
+  FXNAX    0.0%   bootstrap 10-90%: [ 0.0%, 73.2%]
+  FTIHX    0.0%   bootstrap 10-90%: [ 0.0%,  0.0%]
+  E[R] = 15.11%, SD = 14.27%, Sharpe = 0.86
+
+==============================================================================
+LOOKBACK H = 20 years   (tau = 6.68 yr, ESS = 145 months, SPLICED: FLCOX,FSKAX,FXNAX,FTIHX)
+
+b_20 — annual log-return trend (WLS slope), with bootstrap SE:
+  CASH   +0.0145  (SE 0.0064)   -> ordinary +1.46%
+  FLCOX  +0.0946  (SE 0.0396)   -> ordinary +9.93%
+  FSKAX  +0.1207  (SE 0.0396)   -> ordinary +12.83%
+  FXNAX  +0.0207  (SE 0.0129)   -> ordinary +2.09%
+  FTIHX  +0.0555  (SE 0.0448)   -> ordinary +5.70%
+
+C_20 — one-year log-return covariance (x1e4, i.e. %^2 units):
+       CASH  FLCOX  FSKAX  FXNAX  FTIHX
+CASH    4.6    2.2    5.2    2.6   10.9
+FLCOX   2.2  158.6  156.3   12.4  166.8
+FSKAX   5.2  156.3  186.7   30.3  188.8
+FXNAX   2.6   12.4   30.3   30.5   33.8
+FTIHX  10.9  166.8  188.8   33.8  254.8
+
+Correlations:
+       CASH  FLCOX  FSKAX  FXNAX  FTIHX
+CASH   1.00   0.08   0.18   0.22   0.32
+FLCOX  0.08   1.00   0.91   0.18   0.83
+FSKAX  0.18   0.91   1.00   0.40   0.87
+FXNAX  0.22   0.18   0.40   1.00   0.38
+FTIHX  0.32   0.83   0.87   0.38   1.00
+
+Ordinary one-year moments: m = [+1.48% +10.80% +13.89% +2.24% +7.06%], rf = 1.46%
+Tangency portfolio (risky funds, long-only):
+  FLCOX    0.0%   bootstrap 10-90%: [ 0.0%, 62.1%]
+  FSKAX  100.0%   bootstrap 10-90%: [ 0.0%, 100.0%]
+  FXNAX    0.0%   bootstrap 10-90%: [ 0.0%, 91.8%]
+  FTIHX    0.0%   bootstrap 10-90%: [ 0.0%,  0.0%]
+  E[R] = 13.89%, SD = 15.63%, Sharpe = 0.80
+
+Saved results/*.csv

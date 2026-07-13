@@ -1,0 +1,18 @@
+# raw downloaded data (regenerate with fetch_data.py)
+data/
+
+# personal working notes — not part of the public repo
+NOTES.md
+prior-work/
+
+# local build duplicate of index.html
+kernel_report.html
+
+# python
+__pycache__/
+*.pyc
+env/
+pfenv/
+
+# macOS
+.DS_Store
