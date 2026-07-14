@@ -1,0 +1,166 @@
+<meta charset="utf-8">
+<title>June 2026 CPI — Notes</title>
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --baseline: #c3c2b7; --ring: rgba(11,11,11,0.10);
+  --s-head: #2a78d6; --s-core: #1baf7a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --ring: rgba(255,255,255,0.10);
+    --s-head: #3987e5; --s-core: #199e70;
+  }
+}
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 0 20px 72px; }
+main { max-width: 880px; margin: 0 auto; }
+nav { max-width: 880px; margin: 0 auto; display: flex; align-items: baseline; gap: 22px; padding: 18px 0 14px; border-bottom: 1px solid var(--grid); font-size: 0.9rem; }
+nav .brand { font-weight: 700; margin-right: auto; color: var(--ink); }
+nav a { color: var(--ink-2); text-decoration: none; padding-bottom: 3px; }
+nav a:hover { color: var(--ink); }
+nav a.current { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
+h1, h2 { font-family: Charter, Georgia, "Times New Roman", serif; text-wrap: balance; }
+h1 { font-size: 2.05rem; line-height: 1.15; margin: 40px 0 6px; font-weight: 700; }
+h2 { font-size: 1.3rem; margin: 44px 0 10px; font-weight: 700; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.09em; font-size: 0.72rem; color: var(--muted); margin-top: 40px; font-weight: 600; }
+.sub { color: var(--ink-2); max-width: 64ch; margin: 0 0 8px; }
+p { max-width: 68ch; }
+.meta { color: var(--muted); font-size: 0.85rem; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0; }
+.tile { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 18px; }
+.tile .k { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+.tile .v { font-size: 1.7rem; font-weight: 700; margin-top: 2px; }
+.tile .d { font-size: 0.8rem; color: var(--ink-2); margin-top: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.84rem; color: var(--ink-2); margin: 4px 0 10px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; }
+figcaption { color: var(--muted); font-size: 0.82rem; margin-top: 8px; max-width: 68ch; }
+svg { display: block; width: 100%; height: auto; }
+svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.chartbox { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 14px 8px; overflow-x: auto; margin: 18px 0 6px; }
+#tip { position: fixed; pointer-events: none; z-index: 10; display: none; background: var(--ink); color: var(--page); font-size: 0.78rem; line-height: 1.4; padding: 7px 10px; border-radius: 6px; max-width: 280px; font-variant-numeric: tabular-nums; }
+.footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 0.8rem; max-width: 70ch; }
+a { color: inherit; }
+</style>
+
+<nav>
+  <span class="brand">financial · Charles Bouman</span>
+  <a href="index.html">Portfolio analysis</a>
+  <a href="posts.html" class="current">Notes</a>
+</nav>
+
+<main>
+<p class="eyebrow">Notes · July 14, 2026</p>
+<h1>June CPI: the Largest Monthly Decline Since 2020</h1>
+<p class="sub">The June 2026 Consumer Price Index, released this morning by the BLS, fell 0.4% on the month — pulling annual inflation down to 3.5% from May's 4.2% and beating forecasts on both headline and core.</p>
+<p class="meta">Data: FRED CPIAUCSL / CPILFESL (BLS, seasonally adjusted) · Written 2026-07-14</p>
+
+<div class="tiles">
+  <div class="tile"><div class="k">Headline CPI, YoY</div><div class="v">3.5%</div><div class="d">down from 4.2% in May; consensus was 3.8%</div></div>
+  <div class="tile"><div class="k">Core CPI, YoY</div><div class="v">2.6%</div><div class="d">down from 2.8%; consensus was 2.9%</div></div>
+  <div class="tile"><div class="k">June monthly change</div><div class="v">−0.4%</div><div class="d">largest monthly drop since April 2020</div></div>
+</div>
+
+<h2>Four and a half years of inflation</h2>
+<div class="chartbox"><div class="legend"><span><span class="dot" style="background:var(--s-head)"></span>Headline CPI</span><span><span class="dot" style="background:var(--s-core)"></span>Core CPI (ex food &amp; energy)</span><span><span class="dot" style="background:var(--muted)"></span>2% Fed target</span></div><div id="chart-yoy"></div></div>
+<figcaption>Year-over-year change in CPI, monthly. The October–November 2025 observations were never published (government shutdown); the line spans the gap. Hover for values.</figcaption>
+
+<h2>The month-by-month picture</h2>
+<div class="chartbox"><div id="chart-mom"></div></div>
+<figcaption>Monthly change in headline CPI, seasonally adjusted, last twelve published months. June's −0.4% is the only negative month and the deepest since April 2020.</figcaption>
+
+<h2>What happened</h2>
+<p>Almost all of June's decline came from energy. Oil prices fell roughly 25% during the month as hostilities in the Middle East eased — though that relief may prove temporary, as the ceasefire was declared over in early July. The more durable news is core inflation: flat on the month and down to 2.6% annually, its best reading of the year.</p>
+<p>The context matters: this spring, headline inflation surged from 2.4% in January to 4.2% in May — the sharp spike visible at the right edge of the chart. One good month, driven mostly by an oil swing, does not unwind that. The Federal Reserve is still broadly expected to <i>raise</i> rates in September, and Governor Waller said this week it would take several months of readings like this one to convince him inflation is returning to the 2% target.</p>
+<p>For a portfolio built around the stock/bond/cash question (see the <a href="index.html">portfolio analysis</a>), this is exactly the regime uncertainty that decides whether bonds hedge equities or fall with them: in inflation-shock months, stock–bond correlation rises and cash is the safer defensive asset; in growth-shock recessions, duration is the hedge. May's spike and June's plunge are a reminder of how fast that regime signal flips.</p>
+
+<div class="footer">Sources: <a href="https://www.cnbc.com/2026/07/14/consumer-price-index-inflation-report-june-2026.html">CNBC, June 2026 CPI report</a> · <a href="https://www.bls.gov/cpi/">BLS CPI</a> · series from FRED (CPIAUCSL, CPILFESL). Written with Claude as a decision aid; not investment advice.</div>
+</main>
+<div id="tip"></div>
+
+<script>
+const D = {
+dates:["2021-11","2021-12","2022-01","2022-02","2022-03","2022-04","2022-05","2022-06","2022-07","2022-08","2022-09","2022-10","2022-11","2022-12","2023-01","2023-02","2023-03","2023-04","2023-05","2023-06","2023-07","2023-08","2023-09","2023-10","2023-11","2023-12","2024-01","2024-02","2024-03","2024-04","2024-05","2024-06","2024-07","2024-08","2024-09","2024-10","2024-11","2024-12","2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"],
+hy:[6.9,7.17,7.56,7.94,8.57,8.23,8.54,8.98,8.46,8.22,8.19,7.76,7.12,6.4,6.33,5.96,4.92,4.95,4.13,3.07,3.29,3.72,3.69,3.25,3.13,3.32,3.09,3.16,3.49,3.36,3.24,2.97,2.94,2.61,2.43,2.58,2.72,2.87,2.99,2.8,2.38,2.33,2.38,2.68,2.74,2.94,3.02,2.65,2.39,2.43,3.29,3.78,4.17,3.46],
+cy:[4.97,5.49,6.05,6.46,6.48,6.16,6.03,5.91,5.9,6.29,6.62,6.29,5.97,5.69,5.54,5.5,5.57,5.51,5.34,4.85,4.7,4.4,4.13,4.03,4.02,3.92,3.86,3.76,3.82,3.63,3.39,3.27,3.23,3.29,3.28,3.3,3.29,3.21,3.28,3.14,2.81,2.78,2.77,2.91,3.05,3.11,3.02,2.65,2.51,2.47,2.6,2.74,2.82,2.57],
+hm:[0.43,0.23,0.03,0.16,0.1,0.25,0.23,0.35,0.3,0.3,0.17,0.27,0.87,0.64,0.47,-0.42],
+hmD:["2025-01","2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06"]
+};
+const tip = document.getElementById('tip');
+function showTip(evt, html) {
+  tip.innerHTML = html; tip.style.display = 'block';
+  const pad = 14, w = tip.offsetWidth;
+  let x = evt.clientX + pad; if (x + w > innerWidth - 8) x = evt.clientX - w - pad;
+  tip.style.left = x + 'px'; tip.style.top = Math.max(8, evt.clientY - 14) + 'px';
+}
+function hideTip() { tip.style.display = 'none'; }
+function el(tag, attrs, parent) {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e); return e;
+}
+const mo = d => { const [y, m] = d.split('-').map(Number); return y * 12 + m; };
+
+/* YoY line chart, x positioned by true month (gap-aware) */
+(function () {
+  const W = 840, H = 340, m = { t: 16, r: 20, b: 30, l: 44 };
+  const n = D.dates.length, x0 = mo(D.dates[0]), x1 = mo(D.dates[n - 1]);
+  const X = d => m.l + (W - m.l - m.r) * (mo(d) - x0) / (x1 - x0);
+  const Y = v => m.t + (H - m.t - m.b) * (1 - v / 10);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Year-over-year US CPI inflation, late 2021 through June 2026' });
+  for (let v = 0; v <= 10; v += 2) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v === 0 ? 'var(--baseline)' : 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = v + '%';
+  }
+  el('line', { x1: m.l, x2: W - m.r, y1: Y(2), y2: Y(2), stroke: 'var(--muted)', 'stroke-dasharray': '2 4' }, svg);
+  for (let yr = 2022; yr <= 2026; yr++) {
+    el('text', { x: X(yr + '-01'), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = yr;
+  }
+  for (const [key, color] of [['hy', 'var(--s-head)'], ['cy', 'var(--s-core)']]) {
+    const pts = D[key].map((v, i) => `${X(D.dates[i]).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+    el('polyline', { points: pts, fill: 'none', stroke: color, 'stroke-width': 2, 'stroke-linejoin': 'round' }, svg);
+    el('circle', { cx: X(D.dates[n - 1]), cy: Y(D[key][n - 1]), r: 4.5, fill: color, stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+  }
+  el('text', { x: X('2026-06') - 8, y: Y(3.46) - 12, 'text-anchor': 'end', 'font-size': 11.5, 'font-weight': 600, fill: 'var(--s-head)' }, svg).textContent = '3.5%';
+  el('text', { x: X('2026-06') - 8, y: Y(2.57) + 18, 'text-anchor': 'end', 'font-size': 11.5, 'font-weight': 600, fill: 'var(--s-core)' }, svg).textContent = '2.6%';
+  const cross = el('line', { y1: m.t, y2: H - m.b, stroke: 'var(--baseline)', visibility: 'hidden' }, svg);
+  const hit = el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: 'transparent' }, svg);
+  hit.addEventListener('mousemove', evt => {
+    const r = svg.getBoundingClientRect();
+    const px = (evt.clientX - r.left) * W / r.width;
+    let best = 0;
+    for (let k = 0; k < n; k++) if (Math.abs(X(D.dates[k]) - px) < Math.abs(X(D.dates[best]) - px)) best = k;
+    cross.setAttribute('x1', X(D.dates[best])); cross.setAttribute('x2', X(D.dates[best]));
+    cross.setAttribute('visibility', 'visible');
+    showTip(evt, `<b>${D.dates[best]}</b><br>Headline ${D.hy[best].toFixed(1)}%<br>Core ${D.cy[best].toFixed(1)}%`);
+  });
+  hit.addEventListener('mouseleave', () => { cross.setAttribute('visibility', 'hidden'); hideTip(); });
+  document.getElementById('chart-yoy').appendChild(svg);
+})();
+
+/* MoM bars */
+(function () {
+  const W = 840, H = 220, m = { t: 14, r: 20, b: 42, l: 48 };
+  const n = D.hm.length, ymin = -0.6, ymax = 1.0;
+  const bw = (W - m.l - m.r) / n;
+  const Y = v => m.t + (H - m.t - m.b) * (1 - (v - ymin) / (ymax - ymin));
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Monthly change in headline CPI, 2025 to June 2026' });
+  for (const v of [-0.5, 0, 0.5, 1.0]) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v === 0 ? 'var(--baseline)' : 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+  }
+  D.hm.forEach((v, i) => {
+    const x = m.l + i * bw + 3, w = Math.min(bw - 6, 24 + 10);
+    const y = v >= 0 ? Y(v) : Y(0), h = Math.abs(Y(v) - Y(0));
+    const r = el('rect', { x, y, width: w, height: Math.max(h, 1), rx: 3, fill: 'var(--s-head)' }, svg);
+    r.addEventListener('mousemove', evt => showTip(evt, `<b>${D.hmD[i]}</b><br>${(v > 0 ? '+' : '') + v.toFixed(2)}% MoM`));
+    r.addEventListener('mouseleave', hideTip);
+    el('text', { x: x + w / 2, y: H - 24, 'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--muted)', transform: `rotate(-40 ${x + w / 2} ${H - 24})` }, svg).textContent = D.hmD[i];
+  });
+  el('text', { x: m.l + (n - 1) * bw + 3 + 17, y: Y(-0.42) + 16, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 600, fill: 'var(--s-head)' }, svg).textContent = '−0.42%';
+  document.getElementById('chart-mom').appendChild(svg);
+})();
+</script>

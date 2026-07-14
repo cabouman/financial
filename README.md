@@ -3,7 +3,9 @@
 Kernel-weighted trend and covariance estimation for a five-asset index-fund
 portfolio, with efficient-frontier and tangency-portfolio analysis.
 
-**Live report:** https://cabouman.github.io/financial/
+**Live site:** https://cabouman.github.io/financial/ — the portfolio analysis,
+plus dated market notes under [Notes](https://cabouman.github.io/financial/posts.html)
+(each note is a standalone HTML page linked from posts.html).
 
 ## What this is
 

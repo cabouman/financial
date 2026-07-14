@@ -1,0 +1,51 @@
+<meta charset="utf-8">
+<title>Notes — financial</title>
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+  }
+}
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 0 20px 72px; }
+main { max-width: 880px; margin: 0 auto; }
+nav { max-width: 880px; margin: 0 auto; display: flex; align-items: baseline; gap: 22px; padding: 18px 0 14px; border-bottom: 1px solid var(--grid); font-size: 0.9rem; }
+nav .brand { font-weight: 700; margin-right: auto; color: var(--ink); }
+nav a { color: var(--ink-2); text-decoration: none; padding-bottom: 3px; }
+nav a:hover { color: var(--ink); }
+nav a.current { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
+h1 { font-family: Charter, Georgia, "Times New Roman", serif; font-size: 2.05rem; line-height: 1.15; margin: 40px 0 6px; font-weight: 700; }
+.sub { color: var(--ink-2); max-width: 64ch; margin: 0 0 24px; }
+.post { display: block; background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 18px 22px; margin: 14px 0; text-decoration: none; color: inherit; }
+.post:hover { border-color: var(--ink-2); }
+.post .date { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600; }
+.post h2 { font-family: Charter, Georgia, serif; font-size: 1.25rem; margin: 4px 0 6px; font-weight: 700; }
+.post p { margin: 0; color: var(--ink-2); font-size: 0.92rem; max-width: 70ch; }
+.footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 0.8rem; }
+</style>
+
+<nav>
+  <span class="brand">financial · Charles Bouman</span>
+  <a href="index.html">Portfolio analysis</a>
+  <a href="posts.html" class="current">Notes</a>
+</nav>
+
+<main>
+<h1>Notes</h1>
+<p class="sub">Dated notes on markets and data, written as they happen. Decision aids, not investment advice.</p>
+
+<a class="post" href="cpi-2026-07-14.html">
+  <div class="date">July 14, 2026</div>
+  <h2>June CPI: the largest monthly decline since 2020</h2>
+  <p>Headline CPI fell 0.4% in June — the deepest monthly drop since April 2020 — pulling annual inflation to 3.5% from May's 4.2%. Core eased to 2.6%. Nearly all of it was oil; the Fed still leans toward a September hike.</p>
+</a>
+
+<div class="footer">Analyses generated with Claude · code at github.com/cabouman/financial · BSD-3-Clause</div>
+</main>
