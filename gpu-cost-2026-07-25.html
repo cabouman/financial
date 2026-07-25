@@ -1,0 +1,293 @@
+<meta charset="utf-8">
+<title>Charlie's Financial Blog — What Does a FLOP Cost?</title>
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --baseline: #c3c2b7; --ring: rgba(11,11,11,0.10);
+  --s-a: #2a78d6; --s-b: #d97a1f; --s-c: #1baf7a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --ring: rgba(255,255,255,0.10);
+    --s-a: #3987e5; --s-b: #c67420; --s-c: #199e70;
+  }
+}
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 0 20px 72px; }
+main { max-width: 880px; margin: 0 auto; }
+nav { max-width: 880px; margin: 0 auto; display: flex; align-items: baseline; gap: 22px; padding: 18px 0 14px; border-bottom: 1px solid var(--grid); font-size: 0.9rem; }
+nav .brand { font-weight: 700; margin-right: auto; color: var(--ink); }
+nav a { color: var(--ink-2); text-decoration: none; padding-bottom: 3px; }
+nav a:hover { color: var(--ink); }
+nav a.current { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
+h1, h2 { font-family: Charter, Georgia, "Times New Roman", serif; text-wrap: balance; }
+h1 { font-size: 2.05rem; line-height: 1.15; margin: 40px 0 6px; font-weight: 700; }
+h2 { font-size: 1.3rem; margin: 44px 0 10px; font-weight: 700; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.09em; font-size: 0.72rem; color: var(--muted); margin-top: 40px; font-weight: 600; }
+.sub { color: var(--ink-2); max-width: 64ch; margin: 0 0 8px; }
+p { max-width: 68ch; }
+.meta { color: var(--muted); font-size: 0.85rem; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0; }
+.tile { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 18px; }
+.tile .k { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+.tile .v { font-size: 1.7rem; font-weight: 700; margin-top: 2px; }
+.tile .d { font-size: 0.8rem; color: var(--ink-2); margin-top: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.84rem; color: var(--ink-2); margin: 4px 0 10px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; }
+figcaption { color: var(--muted); font-size: 0.82rem; margin-top: 8px; max-width: 68ch; }
+svg { display: block; width: 100%; height: auto; }
+svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.chartbox { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 14px 8px; overflow-x: auto; margin: 18px 0 6px; }
+#tip { position: fixed; pointer-events: none; z-index: 10; display: none; background: var(--ink); color: var(--page); font-size: 0.78rem; line-height: 1.4; padding: 7px 10px; border-radius: 6px; max-width: 280px; font-variant-numeric: tabular-nums; }
+.footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 0.8rem; max-width: 70ch; }
+a { color: inherit; }
+</style>
+
+<nav>
+  <span class="brand">Charlie's Financial Blog</span>
+  <a href="index.html">Portfolio analysis</a>
+  <a href="posts.html" class="current">Daily Notes</a>
+</nav>
+
+<main>
+<p class="eyebrow">Daily Notes · July 25, 2026</p>
+<h1>What Does a FLOP Cost?</h1>
+<p class="sub">GPU compute treated as a commodity: 25 years of price per GFLOP, the memory market that stopped cooperating, and the H100's four-year round trip from $46,000 eBay listings to a rental-market rebound.</p>
+<p class="meta">Data: Epoch AI, Wikipedia/AI Impacts, TechPowerUp, Our World in Data (McCallum), TrendForce, CNBC, SemiAnalysis, Silicon Data — details in footer · Written 2026-07-25</p>
+
+<div class="tiles">
+  <div class="tile"><div class="k">Cost per GFLOP, 2000&rarr;2025</div><div class="v">&divide;50,000</div><div class="d">$640 &rarr; 1.2&cent; (cheapest system, FP32)</div></div>
+  <div class="tile"><div class="k">Doubling time, FLOP/s per $</div><div class="v">~2.5 yr</div><div class="d">Epoch AI fit, 470 GPUs, 2006&ndash;2021</div></div>
+  <div class="tile"><div class="k">HBM $/GB, 2017&rarr;2026</div><div class="v">~flat</div><div class="d">~$20 &rarr; ~$15 (analyst estimates)</div></div>
+  <div class="tile"><div class="k">H100 rental, peak&rarr;trough</div><div class="v">&minus;80%</div><div class="d">$8/hr in 2023 &rarr; $1.70 Oct 2025; +40% since</div></div>
+</div>
+
+<h2>Compute keeps getting cheaper — but the curve is bending</h2>
+<p>A GPU is a terrible commodity — the product changes every 18 months — but dollars per GFLOP is the technology-adjusted price, and it has one of the longest, steepest declines of any price series anywhere: roughly 50,000-fold since 2000. Epoch AI's fit across 470 GPUs puts the doubling time of FLOP/s per dollar at about 2.5 years (FP32).</p>
+<div class="chartbox"><div class="legend"><span><span class="dot" style="background:var(--s-a)"></span>Cheapest known system (Wikipedia $/GFLOPS table)</span><span><span class="dot" style="background:var(--s-c)"></span>NVIDIA GPU at launch MSRP</span></div><div id="chart-flop"></div></div>
+<figcaption>US dollars per GFLOP of peak theoretical FP32 compute, log scale, nominal. Blue: cheapest known system at the time (clusters, consoles, GPUs). Green: NVIDIA consumer flagships at launch MSRP &divide; official peak FP32 GFLOPS. Hover for model and price.</figcaption>
+<p>The fine print matters at the right edge. At launch MSRP, the RTX 4090 (2022) and RTX 5090 (2025) both work out to about 1.9&cent; per FP32 GFLOP — essentially zero improvement in three years, and street prices ran well above MSRP for both. The steep decline continues only in the datacenter, and only at low precision: an H100 delivers FP16 tensor compute at roughly $25&ndash;30 per TFLOP and the B200 at roughly $13&ndash;18 (street-price estimates — NVIDIA publishes no list prices for datacenter parts).</p>
+
+<h2>Memory is the exception</h2>
+<p>DRAM followed the same long slide: about $1,045 per GB in 2000 (constant 2020 dollars) to about $1.09 by 2023. Then AI broke the curve. As high-bandwidth memory consumed fab capacity, DDR5 spot prices roughly quadrupled between September 2025 and February 2026 — the sharpest memory inflation on record. HBM itself — the stacked memory on AI accelerators — has held roughly $15&ndash;20 per GB for a decade: capacity per stack rose from 8 to 36&nbsp;GB, but the price per byte barely moved. Memory, not logic, is where the commodity squeeze lives.</p>
+<div class="chartbox"><div class="legend"><span><span class="dot" style="background:var(--s-a)"></span>DRAM (constant 2020 $)</span><span><span class="dot" style="background:var(--s-b)"></span>DDR5 spot (nominal)</span><span><span class="dot" style="background:var(--s-c)"></span>HBM (analyst estimates)</span></div><div id="chart-mem"></div></div>
+<figcaption>Memory price per gigabyte, log scale. Blue: McCallum/Our World in Data series, inflation-adjusted to 2020 dollars, ends 2023. Orange: nominal DDR5 spot/retail points 2025&ndash;26 (Tom's Hardware, TrendForce) — a different deflator, so the two blues-to-orange levels are indicative, not spliced. Green: HBM2&rarr;HBM3e contract estimates (Fudzilla/GamersNexus teardowns 2017; TrendForce/Goldman Sachs 2025&ndash;26). No public HBM spot market exists; every green point is an industry estimate.</figcaption>
+
+<h2>The H100 as a commodity</h2>
+<p>What has a standard AI GPU — an H100 with 80&nbsp;GB — actually traded at? NVIDIA never published an MSRP, so the record is street prices: about $33,000 at the first public pre-order listing in 2022, $40,000&ndash;46,000 on eBay at the April 2023 shortage peak, back to $30&ndash;32,000 by mid-2023, and by spring 2026 roughly $25&ndash;40,000 new and $15&ndash;28,000 used. Cards that sold near $40,000 in late 2023 now resell for $12&ndash;22,000.</p>
+<div class="chartbox"><div class="legend"><span><span class="dot" style="background:var(--s-a)"></span>New / street price</span><span><span class="dot" style="background:var(--s-b)"></span>Secondary market</span></div><div id="chart-buy"></div></div>
+<figcaption>H100 80GB purchase price, thousands of US dollars. Whiskers show the range each source reported. All points are street or reseller prices — no official list price exists. Sources: Tom's Hardware (2022 listing), CNBC (eBay, Apr 2023), GPU Utils (mid-2023), Introl (Dec 2025), Compute Exchange (Apr 2026).</figcaption>
+<p>The cleaner market signal is the rental price, quoted continuously across dozens of clouds. It launched near $4.70 per GPU-hour in March 2023, spiked past $8 in the shortage, collapsed below $2 on marketplaces by late 2024, and bottomed at $1.70 in October 2025 — then did something commodities do: it turned. SemiAnalysis's 1-year-contract index was back to $2.35 by March 2026, up about 40% from the low.</p>
+<div class="chartbox"><div id="chart-rent"></div></div>
+<figcaption>H100 rental price, US dollars per GPU-hour. The line splices segments as the market evolved: on-demand cloud rates (2023&ndash;24), marketplace medians (2024&ndash;25), and the SemiAnalysis 1-year-contract index (Oct 2025 on). Hyperscaler <i>list</i> prices ran roughly 3&times; higher throughout (AWS launched at $12.29/GPU-hr and cut 44% only in mid-2025). Open point: Vast.ai spot rate, July 2026.</figcaption>
+
+<h2>Why this matters this week</h2>
+<p>These charts are the unit economics behind the AI capex debate that moved markets this week: on Thursday the Magnificent Seven lost about $797&nbsp;billion in market value in one session after Alphabet reported $45&nbsp;billion of quarterly capex — mostly chips like these — and negative free cash flow. Whether that spending earns a return depends on the price lines above: compute per dollar improving (B200 vs H100), memory per dollar suddenly worsening, and the rental market — the closest thing to a spot price for AI capacity — rising again after two years of collapse.</p>
+<p>No positions or advice here; this is a data note. The portfolio question — how much of a retirement account should ride on the companies buying these GPUs — is the subject of the <a href="index.html">portfolio analysis</a>.</p>
+
+<div class="footer">Sources: <a href="https://epoch.ai/blog/trends-in-gpu-price-performance">Epoch AI, Trends in GPU price-performance</a> · <a href="https://en.wikipedia.org/wiki/Floating_point_operations_per_second">Wikipedia $/GFLOPS table</a> (via <a href="https://wiki.aiimpacts.org/ai_timelines/wikipedia_history_of_gflops_costs">AI Impacts</a>) · GPU specs/MSRPs: <a href="https://www.techpowerup.com/gpu-specs/">TechPowerUp</a> · DRAM: <a href="https://ourworldindata.org/grapher/historical-cost-of-computer-memory-and-storage">Our World in Data</a> (J. McCallum), <a href="https://www.tomshardware.com/pc-components/ram/ram-price-index-2026-lowest-price-on-ddr5-and-ddr4-memory-of-all-capacities">Tom's Hardware RAM index</a>, <a href="https://www.trendforce.com/presscenter/news/20240506-12125.html">TrendForce</a> · HBM: Fudzilla/GamersNexus (2017), TrendForce, Goldman Sachs (via summaries) · H100: <a href="https://www.tomshardware.com/news/nvidia-hopper-h100-80gb-price-revealed">Tom's Hardware</a>, <a href="https://www.cnbc.com/2023/04/14/nvidias-h100-ai-chips-selling-for-more-than-40000-on-ebay.html">CNBC</a>, <a href="https://gpus.llm-utils.org/nvidia-h100-gpus-supply-and-demand/">GPU Utils</a>, <a href="https://compute.exchange/blogs/h100-gpu-price-2026">Compute Exchange</a>, <a href="https://www.latent.space/p/gpu-bubble">latent.space</a>, <a href="https://www.silicondata.com/blog/h100-rental-price-over-time">Silicon Data</a>, <a href="https://newsletter.semianalysis.com/p/the-great-gpu-shortage-rental-capacity">SemiAnalysis</a> · Datacenter GPU and HBM prices are analyst/street estimates, not list prices. Written with Claude as a decision aid; not investment advice.</div>
+</main>
+<div id="tip"></div>
+
+<script>
+const tip = document.getElementById('tip');
+function showTip(evt, html) {
+  tip.innerHTML = html; tip.style.display = 'block';
+  const pad = 14, w = tip.offsetWidth;
+  let x = evt.clientX + pad; if (x + w > innerWidth - 8) x = evt.clientX - w - pad;
+  tip.style.left = x + 'px'; tip.style.top = Math.max(8, evt.clientY - 14) + 'px';
+}
+function hideTip() { tip.style.display = 'none'; }
+function el(tag, attrs, parent) {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e); return e;
+}
+const usd = v => v >= 10 ? '$' + Math.round(v) : v >= 1 ? '$' + v.toFixed(2) : (v * 100).toFixed(1) + '¢';
+
+/* Chart 1: $/GFLOP, log scale */
+(function () {
+  const cheapest = [
+    [2000.3, 1000, 'Bunyip Beowulf cluster', 'Apr 2000'],
+    [2000.4, 640, 'KLAT2 cluster', 'May 2000'],
+    [2003.6, 82, 'KASY0 cluster', 'Aug 2003'],
+    [2007.6, 48, 'Microwulf', 'Aug 2007'],
+    [2011.2, 1.80, 'HPU4Science', 'Mar 2011'],
+    [2012.6, 0.75, '4× Radeon 7970', 'Aug 2012'],
+    [2013.4, 0.22, 'PlayStation 4', 'Jun 2013'],
+    [2013.9, 0.16, 'GTX 760 system', 'Nov 2013'],
+    [2015.0, 0.08, 'R9 295X2 system', 'Jan 2015'],
+    [2017.8, 0.0273, 'RX Vega 64 system', 'Oct 2017'],
+    [2020.9, 0.0314, '3× RTX 3080 system', 'Nov 2020'],
+    [2022.7, 0.0194, 'RTX 4090', 'Sep 2022'],
+    [2025.2, 0.0123, 'RX 9070 XT', 'Mar 2025']];
+  const gpus = [
+    [2006.9, 1.73, 'GeForce 8800 GTX · $599', 'Nov 2006'],
+    [2008.5, 1.04, 'GTX 280 · $649', 'Jun 2008'],
+    [2010.9, 0.316, 'GTX 580 · $499', 'Nov 2010'],
+    [2012.2, 0.161, 'GTX 680 · $499', 'Mar 2012'],
+    [2013.9, 0.139, 'GTX 780 Ti · $699', 'Nov 2013'],
+    [2015.5, 0.115, 'GTX 980 Ti · $649', 'Jun 2015'],
+    [2016.4, 0.0675, 'GTX 1080 · $599', 'May 2016'],
+    [2017.2, 0.0616, 'GTX 1080 Ti · $699', 'Mar 2017'],
+    [2018.7, 0.0743, 'RTX 2080 Ti · $999', 'Sep 2018'],
+    [2020.7, 0.0235, 'RTX 3080 · $699', 'Sep 2020'],
+    [2022.8, 0.0194, 'RTX 4090 · $1,599', 'Oct 2022'],
+    [2025.0, 0.0191, 'RTX 5090 · $1,999', 'Jan 2025']];
+  const W = 840, H = 380, m = { t: 16, r: 24, b: 30, l: 56 };
+  const x0 = 1999.5, x1 = 2026.9, lg0 = -2, lg1 = 3;
+  const X = yr => m.l + (W - m.l - m.r) * (yr - x0) / (x1 - x0);
+  const Y = v => m.t + (H - m.t - m.b) * (1 - (Math.log10(v) - lg0) / (lg1 - lg0));
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'US dollars per GFLOP of FP32 compute, 2000 to 2026, log scale' });
+  const ylab = { 3: '$1,000', 2: '$100', 1: '$10', 0: '$1', '-1': '10¢', '-2': '1¢' };
+  for (let d = lg0; d <= lg1; d++) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(10 ** d), y2: Y(10 ** d), stroke: 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(10 ** d) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = ylab[d];
+  }
+  for (let yr = 2000; yr <= 2025; yr += 5) {
+    el('text', { x: X(yr), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = yr;
+  }
+  for (const [pts, color] of [[cheapest, 'var(--s-a)'], [gpus, 'var(--s-c)']]) {
+    el('polyline', { points: pts.map(p => `${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' '), fill: 'none', stroke: color, 'stroke-width': 2, 'stroke-linejoin': 'round' }, svg);
+    for (const p of pts) {
+      const c = el('circle', { cx: X(p[0]), cy: Y(p[1]), r: 4, fill: color, stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+      c.addEventListener('mousemove', evt => showTip(evt, `<b>${p[2]}</b><br>${p[3]} · ${usd(p[1])}/GFLOP`));
+      c.addEventListener('mouseleave', hideTip);
+    }
+  }
+  const lbl = (x, y, txt, color, anchor) =>
+    el('text', { x, y, 'text-anchor': anchor || 'start', 'font-size': 11, 'font-weight': 600, fill: color }, svg).textContent = txt;
+  lbl(X(2000.4) + 10, Y(640), 'KLAT2 $640', 'var(--s-a)');
+  lbl(X(2006.9), Y(1.73) - 12, '8800 GTX $1.73', 'var(--s-c)', 'middle');
+  lbl(X(2016.4) + 10, Y(0.0675) - 6, 'GTX 1080', 'var(--s-c)');
+  lbl(X(2025.0) - 4, Y(0.0191) - 12, 'RTX 5090 1.9¢', 'var(--s-c)', 'end');
+  lbl(X(2025.2) - 12, Y(0.0123) + 4, 'RX 9070 XT 1.2¢', 'var(--s-a)', 'end');
+  document.getElementById('chart-flop').appendChild(svg);
+})();
+
+/* Chart 2: memory $/GB, log scale */
+(function () {
+  const dram = [[2000, 1045], [2001, 216], [2003, 107], [2006, 93.4], [2008, 11.7], [2010, 11.6], [2012, 4.13], [2015, 4.00], [2017, 2.90], [2020, 2.75], [2021, 2.48], [2022, 1.86], [2023, 1.09]]
+    .map(p => [p[0], p[1], 'DRAM (2020 $)', String(p[0])]);
+  const ddr5 = [[2025.0, 2.8, 'DDR5 retail kit', 'early 2025'], [2025.7, 3.42, 'DDR5 chip spot', 'Sep 2025'], [2025.95, 13.6, 'DDR5 chip spot', 'Dec 2025'], [2026.1, 14.5, 'DDR5 retail kits $13–16/GB', 'Feb 2026']];
+  const hbm = [[2017.4, 20, 'HBM2 (Vega teardowns)', '2017'], [2025.3, 18.5, 'HBM3e, $17–20 est.', 'H1 2025'], [2025.6, 15, 'HBM3e blended est.', '2025'], [2026.1, 15, 'HBM3e contract, $13–17 est.', 'early 2026']];
+  const W = 840, H = 320, m = { t: 16, r: 24, b: 30, l: 56 };
+  const x0 = 1999.5, x1 = 2026.9, lg0 = -0.15, lg1 = 3.25;
+  const X = yr => m.l + (W - m.l - m.r) * (yr - x0) / (x1 - x0);
+  const Y = v => m.t + (H - m.t - m.b) * (1 - (Math.log10(v) - lg0) / (lg1 - lg0));
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Memory price per gigabyte, 2000 to 2026, log scale' });
+  for (let d = 0; d <= 3; d++) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(10 ** d), y2: Y(10 ** d), stroke: 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(10 ** d) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = '$' + (10 ** d).toLocaleString();
+  }
+  for (let yr = 2000; yr <= 2025; yr += 5) {
+    el('text', { x: X(yr), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = yr;
+  }
+  const series = [[dram, 'var(--s-a)', ''], [ddr5, 'var(--s-b)', ''], [hbm, 'var(--s-c)', '5 5']];
+  for (const [pts, color, dash] of series) {
+    const attrs = { points: pts.map(p => `${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' '), fill: 'none', stroke: color, 'stroke-width': 2, 'stroke-linejoin': 'round' };
+    if (dash) attrs['stroke-dasharray'] = dash;
+    el('polyline', attrs, svg);
+    for (const p of pts) {
+      const c = el('circle', { cx: X(p[0]), cy: Y(p[1]), r: 4, fill: color, stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+      c.addEventListener('mousemove', evt => showTip(evt, `<b>${p[2]}</b><br>${p[3]} · $${p[1] % 1 ? p[1].toFixed(2) : p[1].toLocaleString()}/GB`));
+      c.addEventListener('mouseleave', hideTip);
+    }
+  }
+  const lbl = (x, y, txt, color, anchor) =>
+    el('text', { x, y, 'text-anchor': anchor || 'start', 'font-size': 11, 'font-weight': 600, fill: color }, svg).textContent = txt;
+  lbl(X(2000) + 10, Y(1045) + 4, '$1,045', 'var(--s-a)');
+  lbl(X(2023) - 8, Y(1.09) + 16, 'DRAM $1.09', 'var(--s-a)', 'end');
+  lbl(X(2017.4), Y(20) - 12, 'HBM2 ~$20', 'var(--s-c)', 'middle');
+  lbl(X(2025.6) - 8, Y(15) + 16, 'HBM3e ~$15', 'var(--s-c)', 'end');
+  lbl(X(2025.8), Y(7), 'DDR5 $13–16', 'var(--s-b)', 'end');
+  document.getElementById('chart-mem').appendChild(svg);
+})();
+
+/* Chart 3: H100 buy price, linear, with range whiskers */
+(function () {
+  const news = [
+    [2022.3, 33, 33, 33, 'Pre-order list, PCIe (Japan)', 'Apr 2022'],
+    [2023.55, 31, 30, 32, 'Street price (GPU Utils survey)', 'Jul 2023'],
+    [2025.95, 27.5, 25, 30, 'New (Introl)', 'Dec 2025'],
+    [2026.22, 32.5, 25, 40, 'New (Compute Exchange)', 'Apr 2026']];
+  const used = [
+    [2023.3, 43, 40, 46, 'eBay listings, shortage peak (CNBC)', 'Apr 2023'],
+    [2026.42, 21.5, 15, 28, 'Used (Compute Exchange)', 'Apr 2026']];
+  const W = 840, H = 300, m = { t: 16, r: 24, b: 30, l: 56 };
+  const x0 = 2022, x1 = 2026.8;
+  const X = yr => m.l + (W - m.l - m.r) * (yr - x0) / (x1 - x0);
+  const Y = v => m.t + (H - m.t - m.b) * (1 - v / 50);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'H100 80GB purchase price, 2022 to 2026' });
+  for (let v = 0; v <= 50; v += 10) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v === 0 ? 'var(--baseline)' : 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = '$' + v + 'k';
+  }
+  for (let yr = 2022; yr <= 2026; yr++) {
+    el('text', { x: X(yr), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = yr;
+  }
+  for (const [pts, color] of [[news, 'var(--s-a)'], [used, 'var(--s-b)']]) {
+    for (const p of pts) {
+      const x = X(p[0]);
+      if (p[3] > p[2]) {
+        el('line', { x1: x, x2: x, y1: Y(p[2]), y2: Y(p[3]), stroke: color, 'stroke-width': 2, opacity: 0.55 }, svg);
+        el('line', { x1: x - 5, x2: x + 5, y1: Y(p[2]), y2: Y(p[2]), stroke: color, 'stroke-width': 2, opacity: 0.55 }, svg);
+        el('line', { x1: x - 5, x2: x + 5, y1: Y(p[3]), y2: Y(p[3]), stroke: color, 'stroke-width': 2, opacity: 0.55 }, svg);
+      }
+      const c = el('circle', { cx: x, cy: Y(p[1]), r: 5, fill: color, stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+      c.addEventListener('mousemove', evt => showTip(evt, `<b>${p[4]}</b><br>${p[5]} · $${p[2]}k${p[3] > p[2] ? '–$' + p[3] + 'k' : ''}`));
+      c.addEventListener('mouseleave', hideTip);
+    }
+  }
+  const lbl = (x, y, txt, color, anchor) =>
+    el('text', { x, y, 'text-anchor': anchor || 'start', 'font-size': 11, 'font-weight': 600, fill: color }, svg).textContent = txt;
+  lbl(X(2022.3) + 10, Y(33) + 4, '$33k list', 'var(--s-a)');
+  lbl(X(2023.3) + 10, Y(43) + 4, '$40–46k eBay peak', 'var(--s-b)');
+  lbl(X(2026.3) - 10, Y(21.5) + 4, 'used $15–28k', 'var(--s-b)', 'end');
+  document.getElementById('chart-buy').appendChild(svg);
+})();
+
+/* Chart 4: H100 rental $/hr */
+(function () {
+  const pts = [
+    [2023.2, 4.70, 'Cloud launch, typical on-demand', 'Mar 2023'],
+    [2023.6, 8.00, 'Shortage peak, spot', 'mid-2023'],
+    [2024.1, 2.85, 'Neocloud on-demand', 'early 2024'],
+    [2024.8, 2.00, 'Marketplace rates dip under $2', 'late 2024'],
+    [2025.5, 1.95, 'Marketplace median', 'H2 2025'],
+    [2025.8, 1.70, '1-yr contract index low (SemiAnalysis)', 'Oct 2025'],
+    [2026.2, 2.35, '1-yr contract index (SemiAnalysis)', 'Mar 2026']];
+  const spot = [2026.55, 1.92, 'Vast.ai spot rate', 'Jul 2026'];
+  const W = 840, H = 300, m = { t: 16, r: 24, b: 30, l: 56 };
+  const x0 = 2022.9, x1 = 2026.9;
+  const X = yr => m.l + (W - m.l - m.r) * (yr - x0) / (x1 - x0);
+  const Y = v => m.t + (H - m.t - m.b) * (1 - v / 9);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'H100 rental price per GPU-hour, 2023 to 2026' });
+  for (let v = 0; v <= 8; v += 2) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v === 0 ? 'var(--baseline)' : 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = '$' + v + '/hr';
+  }
+  for (let yr = 2023; yr <= 2026; yr++) {
+    el('text', { x: X(yr), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = yr;
+  }
+  el('polyline', { points: pts.map(p => `${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' '), fill: 'none', stroke: 'var(--s-a)', 'stroke-width': 2, 'stroke-linejoin': 'round' }, svg);
+  for (const p of pts) {
+    const c = el('circle', { cx: X(p[0]), cy: Y(p[1]), r: 4.5, fill: 'var(--s-a)', stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+    c.addEventListener('mousemove', evt => showTip(evt, `<b>${p[2]}</b><br>${p[3]} · $${p[1].toFixed(2)}/GPU-hr`));
+    c.addEventListener('mouseleave', hideTip);
+  }
+  const sc = el('circle', { cx: X(spot[0]), cy: Y(spot[1]), r: 4.5, fill: 'var(--surface)', stroke: 'var(--s-a)', 'stroke-width': 2 }, svg);
+  sc.addEventListener('mousemove', evt => showTip(evt, `<b>${spot[2]}</b><br>${spot[3]} · $${spot[1].toFixed(2)}/GPU-hr`));
+  sc.addEventListener('mouseleave', hideTip);
+  const lbl = (x, y, txt, anchor) =>
+    el('text', { x, y, 'text-anchor': anchor || 'start', 'font-size': 11, 'font-weight': 600, fill: 'var(--s-a)' }, svg).textContent = txt;
+  lbl(X(2023.6), Y(8.00) - 10, '$8.00 peak', 'middle');
+  lbl(X(2025.8), Y(1.70) + 18, '$1.70 low', 'middle');
+  lbl(X(2026.2), Y(2.35) - 12, '$2.35', 'middle');
+  lbl(X(2026.55), Y(1.92) + 18, 'spot $1.92', 'end');
+  document.getElementById('chart-rent').appendChild(svg);
+})();
+</script>
