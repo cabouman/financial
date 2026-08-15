@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>Charlie's Financial Blog — Analysis Blog</title>
+<title>Charlie's Financial Blog</title>
 <style>
 :root {
   --page: #f9f9f7; --surface: #fcfcfb;
@@ -22,35 +22,37 @@ nav a { color: var(--ink-2); text-decoration: none; padding-bottom: 3px; }
 nav a:hover { color: var(--ink); }
 nav a.current { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
 h1 { font-family: Charter, Georgia, "Times New Roman", serif; font-size: 2.05rem; line-height: 1.15; margin: 40px 0 6px; font-weight: 700; }
-.sub { color: var(--ink-2); max-width: 64ch; margin: 0 0 24px; }
-.post { display: block; background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 18px 22px; margin: 14px 0; text-decoration: none; color: inherit; }
+.sub { color: var(--ink-2); max-width: 64ch; margin: 0 0 28px; }
+.post { display: block; background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 20px 24px; margin: 16px 0; text-decoration: none; color: inherit; }
 .post:hover { border-color: var(--ink-2); }
-.post .date { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600; }
-.post h2 { font-family: Charter, Georgia, serif; font-size: 1.25rem; margin: 4px 0 6px; font-weight: 700; }
-.post p { margin: 0; color: var(--ink-2); font-size: 0.92rem; max-width: 70ch; }
+.post h2 { font-family: Charter, Georgia, serif; font-size: 1.35rem; margin: 0 0 6px; font-weight: 700; }
+.post p { margin: 0 0 8px; color: var(--ink-2); font-size: 0.95rem; max-width: 70ch; }
+.post .latest { font-size: 0.85rem; color: var(--muted); margin: 0; }
+.post .latest b { color: var(--ink-2); font-weight: 600; }
 .footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 0.8rem; }
 </style>
 
 <nav>
-  <span class="brand">Charlie's Financial Blog</span>
-  <a href="index.html" class="current">Analysis Blog</a>
-  <a href="posts.html">News Blog</a>
+  <a class="brand" href="index.html">Charlie's Financial Blog</a>
+  <a href="index.html" class="current">Home</a>
+  <a href="analysis.html">Analysis Blog</a>
+  <a href="news.html">News Blog</a>
 </nav>
 
 <main>
-<h1>Analysis Blog</h1>
-<p class="sub">Dated analyses of markets and macroeconomic questions, newest first. Each analysis is frozen when published — later updates appear as new dated entries, so the record shows what the data said at the time. Decision aids, not investment advice.</p>
+<h1>Charlie's Financial Blog</h1>
+<p class="sub">Data-driven notes on markets, macroeconomics, and the long-run portfolio questions of an index-fund investor. Every post is dated and frozen when published, so the record shows what the data said at the time. Everything here is a decision aid, not investment advice.</p>
 
-<a class="post" href="analysis/debt-real-rates-2026-08-15.html">
-  <div class="date">August 15, 2026</div>
-  <h2>Federal Debt: Real Rates, Real Growth, and the Inflation Exit</h2>
-  <p>Debt-to-GDP ratios don't predict debt crises — real rates versus real growth do. Checking that claim (from a Money &amp; Macro video) against the literature and 85 years of U.S. data: the average real rate on the debt is ≈0%, the marginal rate (TIPS, 2.42%) now exceeds forecast growth, and the last exit from a debt peak ran through a decade of negative real rates.</p>
+<a class="post" href="analysis.html">
+  <h2>Analysis Blog</h2>
+  <p>Longer quantitative analyses: portfolio estimation, macroeconomic questions, and checks of claims against data and the academic literature.</p>
+  <p class="latest"><b>Latest:</b> Federal Debt: Real Rates, Real Growth, and the Inflation Exit — August 15, 2026</p>
 </a>
 
-<a class="post" href="analysis/portfolio-2026-07-13.html">
-  <div class="date">July 13, 2026</div>
-  <h2>Kernel-Weighted Estimates: Trend and Covariance at Four Lookbacks</h2>
-  <p>Exponentially-weighted regression of log total-return wealth for five assets — Cash, US-stock, US-value, exUS-stock, and US-bond — with one-year covariance, lognormal moment conversion, tangency portfolios, and block-bootstrap uncertainty. Monthly data through 2026-06. Tangency composition is statistically unidentified at every lookback; cash dominates US-bond on the recent-lookback frontiers.</p>
+<a class="post" href="news.html">
+  <h2>News Blog</h2>
+  <p>Short dated notes on economic data and market events, written as they happen.</p>
+  <p class="latest"><b>Latest:</b> July CPI: a Second Quiet Month, and the September Hike Looks Less Likely — August 15, 2026</p>
 </a>
 
 <div class="footer">Analyses generated with Claude · code at github.com/cabouman/financial · BSD-3-Clause</div>

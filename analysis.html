@@ -1,0 +1,64 @@
+<meta charset="utf-8">
+<title>Charlie's Financial Blog — Analysis Blog</title>
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --ring: rgba(11,11,11,0.10);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --ring: rgba(255,255,255,0.10);
+  }
+}
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 0 20px 72px; }
+main { max-width: 880px; margin: 0 auto; }
+nav { max-width: 880px; margin: 0 auto; display: flex; align-items: baseline; gap: 22px; padding: 18px 0 14px; border-bottom: 1px solid var(--grid); font-size: 0.9rem; }
+nav .brand { font-weight: 700; margin-right: auto; color: var(--ink); }
+nav a { color: var(--ink-2); text-decoration: none; padding-bottom: 3px; }
+nav a:hover { color: var(--ink); }
+nav a.current { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
+h1 { font-family: Charter, Georgia, "Times New Roman", serif; font-size: 2.05rem; line-height: 1.15; margin: 40px 0 6px; font-weight: 700; }
+.sub { color: var(--ink-2); max-width: 64ch; margin: 0 0 24px; }
+.post { display: block; background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 18px 22px; margin: 14px 0; text-decoration: none; color: inherit; }
+.post:hover { border-color: var(--ink-2); }
+.post .date { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); font-weight: 600; }
+.post h2 { font-family: Charter, Georgia, serif; font-size: 1.25rem; margin: 4px 0 6px; font-weight: 700; }
+.post p { margin: 0; color: var(--ink-2); font-size: 0.92rem; max-width: 70ch; }
+.footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 0.8rem; }
+</style>
+
+<nav>
+  <a class="brand" href="index.html">Charlie's Financial Blog</a>
+  <a href="index.html">Home</a>
+  <a href="analysis.html" class="current">Analysis Blog</a>
+  <a href="news.html">News Blog</a>
+</nav>
+
+<main>
+<h1>Analysis Blog</h1>
+<p class="sub">Dated analyses of markets and macroeconomic questions, newest first. Each analysis is frozen when published — later updates appear as new dated entries, so the record shows what the data said at the time. Decision aids, not investment advice.</p>
+
+<a class="post" href="analysis/debt-real-rates-2026-08-15.html">
+  <div class="date">August 15, 2026</div>
+  <h2>Federal Debt: Real Rates, Real Growth, and the Inflation Exit</h2>
+  <p>Debt-to-GDP ratios don't predict debt crises — real rates versus real growth do. Checking that claim (from a Money &amp; Macro video) against the literature and 85 years of U.S. data: the average real rate on the debt is ≈0%, the marginal rate (TIPS, 2.42%) now exceeds forecast growth, and the last exit from a debt peak ran through a decade of negative real rates.</p>
+</a>
+
+<a class="post" href="analysis/gpu-cost-2026-07-25.html">
+  <div class="date">July 25, 2026</div>
+  <h2>What does a FLOP cost?</h2>
+  <p>GPU compute as a commodity: price per GFLOP fell ~50,000-fold since 2000 but is flattening at the consumer high end; DRAM broke a 25-year decline as AI ate fab capacity; and the H100's rental price collapsed 80% before turning back up in 2026.</p>
+</a>
+
+<a class="post" href="analysis/portfolio-2026-07-13.html">
+  <div class="date">July 13, 2026</div>
+  <h2>Kernel-Weighted Estimates: Trend and Covariance at Four Lookbacks</h2>
+  <p>Exponentially-weighted regression of log total-return wealth for five assets — Cash, US-stock, US-value, exUS-stock, and US-bond — with one-year covariance, lognormal moment conversion, tangency portfolios, and block-bootstrap uncertainty. Monthly data through 2026-06. Tangency composition is statistically unidentified at every lookback; cash dominates US-bond on the recent-lookback frontiers.</p>
+</a>
+
+<div class="footer">Analyses generated with Claude · code at github.com/cabouman/financial · BSD-3-Clause</div>
+</main>

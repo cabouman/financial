@@ -1,0 +1,175 @@
+<meta charset="utf-8">
+<title>Charlie's Financial Blog — July 2026 Jobs Report</title>
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --baseline: #c3c2b7; --ring: rgba(11,11,11,0.10);
+  --s-head: #2a78d6; --s-core: #1baf7a;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --ring: rgba(255,255,255,0.10);
+    --s-head: #3987e5; --s-core: #199e70;
+  }
+}
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 0 20px 72px; }
+main { max-width: 880px; margin: 0 auto; }
+nav { max-width: 880px; margin: 0 auto; display: flex; align-items: baseline; gap: 22px; padding: 18px 0 14px; border-bottom: 1px solid var(--grid); font-size: 0.9rem; }
+nav .brand { font-weight: 700; margin-right: auto; color: var(--ink); }
+nav a { color: var(--ink-2); text-decoration: none; padding-bottom: 3px; }
+nav a:hover { color: var(--ink); }
+nav a.current { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
+h1, h2 { font-family: Charter, Georgia, "Times New Roman", serif; text-wrap: balance; }
+h1 { font-size: 2.05rem; line-height: 1.15; margin: 40px 0 6px; font-weight: 700; }
+h2 { font-size: 1.3rem; margin: 44px 0 10px; font-weight: 700; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.09em; font-size: 0.72rem; color: var(--muted); margin-top: 40px; font-weight: 600; }
+.sub { color: var(--ink-2); max-width: 64ch; margin: 0 0 8px; }
+p { max-width: 68ch; }
+.meta { color: var(--muted); font-size: 0.85rem; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0; }
+.tile { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 18px; }
+.tile .k { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+.tile .v { font-size: 1.7rem; font-weight: 700; margin-top: 2px; }
+.tile .d { font-size: 0.8rem; color: var(--ink-2); margin-top: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.84rem; color: var(--ink-2); margin: 4px 0 10px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; }
+figcaption { color: var(--muted); font-size: 0.82rem; margin-top: 8px; max-width: 68ch; }
+svg { display: block; width: 100%; height: auto; }
+svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.chartbox { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 14px 8px; overflow-x: auto; margin: 18px 0 6px; }
+#tip { position: fixed; pointer-events: none; z-index: 10; display: none; background: var(--ink); color: var(--page); font-size: 0.78rem; line-height: 1.4; padding: 7px 10px; border-radius: 6px; max-width: 280px; font-variant-numeric: tabular-nums; }
+.footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 0.8rem; max-width: 70ch; }
+a { color: inherit; }
+</style>
+
+<nav>
+  <a class="brand" href="../index.html">Charlie's Financial Blog</a>
+  <a href="../index.html">Home</a>
+  <a href="../analysis.html">Analysis Blog</a>
+  <a href="../news.html" class="current">News Blog</a>
+</nav>
+
+<main>
+<p class="eyebrow">News Blog · August 15, 2026</p>
+<h1>The July Jobs Report: a Net Loss of Jobs, with Caveats</h1>
+<p class="sub">The July employment report, released August 7 by the BLS, showed nonfarm payrolls falling by 23,000 against expectations of an 83,000 gain. The loss came with caveats in both directions: most of it was a seasonal quirk in government payrolls, but revisions erased 103,000 jobs from May and June.</p>
+<p class="meta">Data: FRED PAYEMS / UNRATE / CES0500000003 (BLS, seasonally adjusted) · Written 2026-08-15</p>
+
+<div class="tiles">
+  <div class="tile"><div class="k">Payrolls, July</div><div class="v">−23k</div><div class="d">consensus was +83k; private payrolls +30k</div></div>
+  <div class="tile"><div class="k">Unemployment</div><div class="v">4.1%</div><div class="d">down from 4.2% in June</div></div>
+  <div class="tile"><div class="k">May + June revisions</div><div class="v">−103k</div><div class="d">May +129k → +63k; June +57k → +20k</div></div>
+  <div class="tile"><div class="k">Wage growth</div><div class="v">3.2%</div><div class="d">YoY, nominal; lowest since May 2021</div></div>
+</div>
+
+<h2>Payrolls, month by month</h2>
+<div class="chartbox"><div id="chart-pay"></div></div>
+<figcaption>Monthly change in nonfarm payrolls, seasonally adjusted, February 2025 through July 2026 (FRED PAYEMS, after revisions). Payroll gains have averaged 34,000 per month over the past 12 months, and four of those months were losses. The unemployment rate for October 2025 was never published (government shutdown); payroll figures for that month were published later.</figcaption>
+
+<h2>What happened</h2>
+<p>The headline loss was mostly one sector. Local government education payrolls fell by 50,000, a swing the BLS attributes to seasonal-adjustment noise around the school year, and economists expect part of it to be revised away. Private payrolls rose by 30,000. Retail trade lost 19,000 jobs and financial activities lost 14,000, while health care continued to add jobs at a slower pace than usual.</p>
+<p>The weakness is clearer in the trend than in any single month. Payroll growth has averaged 34,000 per month over the past 12 months, and the May and June figures were revised down by a combined 103,000 — May from +129,000 to +63,000, and June from +57,000 to +20,000. The drop in the unemployment rate to 4.1% overstates the good news for the same reason the headline overstates the bad: both surveys are noisy month to month, and the 12-month picture is one of an economy adding very few jobs.</p>
+
+<h2>Wage growth keeps cooling</h2>
+<div class="chartbox"><div class="legend"><span><span class="dot" style="background:var(--s-core)"></span>Nominal wage growth, year-over-year</span><span><span class="dot" style="background:var(--s-head)"></span>Real wage growth (deflated by CPI)</span></div><div id="chart-ahe"></div></div>
+<figcaption>Year-over-year change in average hourly earnings, private nonfarm payrolls, January 2022 through July 2026, in nominal terms (FRED CES0500000003) and in real terms (deflated by CPI, FRED CPIAUCSL). The real line has a gap at October 2025, when CPI was never published (government shutdown).</figcaption>
+<p>These figures are nominal — not adjusted for inflation. Average hourly earnings rose 2 cents in July, bringing the nominal annual rate to 3.2%, the lowest since May 2021 and below the 3.5% forecast. With CPI inflation at 3.4%, real wage growth is slightly negative: about −0.2% over the past year.</p>
+<p>The real line is the one that measures purchasing power, and it has moved in a wider arc. Real wages fell roughly 3% per year during the 2022 inflation, recovered at about +1% per year through 2023–2025, and turned negative again this spring when energy prices pushed inflation above wage growth. Slowing nominal wage growth removes a source of inflation pressure; negative real wage growth removes household spending power.</p>
+
+<h2>Why it mattered for rates</h2>
+<p>This report is the main reason a September rate hike now looks unlikely. Before it came out, investors expected the Fed to raise rates in September to fight the spring inflation surge. The report showed the job market weakening, and the Fed must weigh employment as well as inflation. Five days later, the CPI report (covered in <a href="cpi-2026-08-15.html">the previous note</a>) showed only a small price increase, which pointed the same direction. By the end of this week, futures markets put the chance of a September hike at 42%. The next employment report comes out September 4, two weeks before the Fed's September meeting.</p>
+
+<div class="footer">Sources: <a href="https://www.bls.gov/news.release/empsit.nr0.htm">BLS Employment Situation, July 2026</a> · <a href="https://www.cnbc.com/2026/08/07/jobs-report-july-2026.html">CNBC, July 2026 jobs report</a> · <a href="https://www.cnbc.com/2026/08/07/here-are-three-key-takeaways-from-the-disappointing-july-jobs-report.html">CNBC, three takeaways</a> · series from FRED (PAYEMS, UNRATE, CES0500000003). Written with Claude as a decision aid; not investment advice.</div>
+</main>
+<div id="tip"></div>
+
+<script>
+const D = {
+pm: ["2025-02","2025-03","2025-04","2025-05","2025-06","2025-07","2025-08","2025-09","2025-10","2025-11","2025-12","2026-01","2026-02","2026-03","2026-04","2026-05","2026-06","2026-07"],
+pv: [42,67,108,13,-20,64,-70,76,-140,41,-17,160,-156,214,148,63,20,-23],
+am0: "2022-01",
+rw: [-1.84,-2.45,-2.47,-2.29,-2.75,-3.28,-2.75,-2.61,-2.83,-2.55,-1.9,-1.38,-1.72,-1.12,-0.28,-0.33,0.22,1.54,1.34,0.72,0.71,0.94,0.95,0.76,1.26,0.95,0.64,0.6,0.88,0.92,0.67,1.28,1.45,1.43,1.43,1.18,0.95,1.28,1.79,1.55,1.57,1.14,1.19,1.01,0.8,null,1.2,1.05,1.23,1.24,0.14,-0.2,-0.8,-0.05,-0.15],
+ahe: [5.58,5.29,5.89,5.76,5.56,5.4,5.48,5.39,5.13,5.01,5.09,4.94,4.49,4.77,4.62,4.6,4.36,4.66,4.67,4.47,4.42,4.22,4.11,4.1,4.39,4.13,4.15,3.98,4.15,3.92,3.63,3.92,3.91,4.05,4.18,4.08,3.97,4.11,4.21,3.91,3.98,3.86,3.96,3.98,3.85,3.92,3.93,3.73,3.66,3.7,3.43,3.57,3.34,3.41,3.15]
+};
+const tip = document.getElementById('tip');
+function showTip(evt, html) {
+  tip.innerHTML = html; tip.style.display = 'block';
+  const pad = 14, w = tip.offsetWidth;
+  let x = evt.clientX + pad; if (x + w > innerWidth - 8) x = evt.clientX - w - pad;
+  tip.style.left = x + 'px'; tip.style.top = Math.max(8, evt.clientY - 14) + 'px';
+}
+function hideTip() { tip.style.display = 'none'; }
+function el(tag, attrs, parent) {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e); return e;
+}
+
+/* payroll bars */
+(function () {
+  const W = 840, H = 260, m = { t: 16, r: 20, b: 44, l: 52 };
+  const n = D.pv.length, ymin = -200, ymax = 250;
+  const bw = (W - m.l - m.r) / n;
+  const Y = v => m.t + (H - m.t - m.b) * (1 - (v - ymin) / (ymax - ymin));
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Monthly change in US nonfarm payrolls, February 2025 through July 2026' });
+  for (const v of [-200, -100, 0, 100, 200]) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v === 0 ? 'var(--baseline)' : 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = (v > 0 ? '+' : '') + v + 'k';
+  }
+  D.pv.forEach((v, i) => {
+    const x = m.l + i * bw + 3, w = bw - 6;
+    const y = v >= 0 ? Y(v) : Y(0), h = Math.abs(Y(v) - Y(0));
+    const r = el('rect', { x, y, width: w, height: Math.max(h, 1), rx: 3, fill: 'var(--s-head)' }, svg);
+    r.addEventListener('mousemove', evt => showTip(evt, `<b>${D.pm[i]}</b><br>${(v > 0 ? '+' : '') + v}k payrolls`));
+    r.addEventListener('mouseleave', hideTip);
+    el('text', { x: x + w / 2, y: H - 26, 'text-anchor': 'middle', 'font-size': 9.5, fill: 'var(--muted)', transform: `rotate(-40 ${x + w / 2} ${H - 26})` }, svg).textContent = D.pm[i];
+  });
+  el('text', { x: m.l + (n - 1) * bw + 3 + (bw - 6) / 2, y: Y(-23) + 16, 'text-anchor': 'middle', 'font-size': 11, 'font-weight': 600, fill: 'var(--s-head)' }, svg).textContent = '−23k';
+  document.getElementById('chart-pay').appendChild(svg);
+})();
+
+/* wage growth: nominal and real */
+(function () {
+  const W = 840, H = 260, m = { t: 16, r: 20, b: 30, l: 46 };
+  const n = D.ahe.length;
+  const X = i => m.l + (W - m.l - m.r) * i / (n - 1);
+  const Y = v => m.t + (H - m.t - m.b) * (1 - (v - (-4)) / (6.5 - (-4)));
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'Nominal and real year-over-year wage growth, January 2022 through July 2026' });
+  for (const v of [-4, -2, 0, 2, 4, 6]) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v === 0 ? 'var(--baseline)' : 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = v + '%';
+  }
+  for (let yr = 2022; yr <= 2026; yr++) {
+    el('text', { x: X((yr - 2022) * 12), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = yr;
+  }
+  for (const [key, color] of [['ahe', 'var(--s-core)'], ['rw', 'var(--s-head)']]) {
+    let seg = [];
+    const flush = () => { if (seg.length > 1) el('polyline', { points: seg.join(' '), fill: 'none', stroke: color, 'stroke-width': 2, 'stroke-linejoin': 'round' }, svg); seg = []; };
+    D[key].forEach((v, i) => { if (v === null) flush(); else seg.push(`${X(i).toFixed(1)},${Y(v).toFixed(1)}`); });
+    flush();
+    const last = D[key][n - 1];
+    el('circle', { cx: X(n - 1), cy: Y(last), r: 4.5, fill: color, stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+  }
+  el('text', { x: X(n - 1) - 8, y: Y(3.15) - 10, 'text-anchor': 'end', 'font-size': 11.5, 'font-weight': 600, fill: 'var(--s-core)' }, svg).textContent = 'nominal 3.2%';
+  el('text', { x: X(n - 1) - 8, y: Y(-0.15) + 18, 'text-anchor': 'end', 'font-size': 11.5, 'font-weight': 600, fill: 'var(--s-head)' }, svg).textContent = 'real −0.2%';
+  const mm = i => { const y = 2022 + Math.floor(i / 12), mo = i % 12 + 1; return `${y}-${String(mo).padStart(2, '0')}`; };
+  const cross = el('line', { y1: m.t, y2: H - m.b, stroke: 'var(--baseline)', visibility: 'hidden' }, svg);
+  const hit = el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: 'transparent' }, svg);
+  hit.addEventListener('mousemove', evt => {
+    const r = svg.getBoundingClientRect();
+    const px = (evt.clientX - r.left) * W / r.width;
+    let best = Math.round((px - m.l) / ((W - m.l - m.r) / (n - 1)));
+    best = Math.max(0, Math.min(n - 1, best));
+    cross.setAttribute('x1', X(best)); cross.setAttribute('x2', X(best));
+    cross.setAttribute('visibility', 'visible');
+    const rv = D.rw[best] === null ? 'n/a' : D.rw[best].toFixed(1) + '%';
+    showTip(evt, `<b>${mm(best)}</b><br>Nominal +${D.ahe[best].toFixed(1)}%<br>Real ${rv}`);
+  });
+  hit.addEventListener('mouseleave', () => { cross.setAttribute('visibility', 'hidden'); hideTip(); });
+  document.getElementById('chart-ahe').appendChild(svg);
+})();
+</script>
