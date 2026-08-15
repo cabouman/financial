@@ -19,3 +19,6 @@ pfenv/
 
 # local copies of papers (copyrighted; not for the public repo)
 literature/
+
+# editor config
+.idea/
