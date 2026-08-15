@@ -16,3 +16,6 @@ pfenv/
 
 # macOS
 .DS_Store
+
+# local copies of papers (copyrighted; not for the public repo)
+literature/
