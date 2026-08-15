@@ -1,0 +1,211 @@
+<meta charset="utf-8">
+<title>Charlie's Financial Blog — Federal Debt and Real Interest Rates</title>
+<style>
+:root {
+  --page: #f9f9f7; --surface: #fcfcfb;
+  --ink: #0b0b0b; --ink-2: #52514e; --muted: #898781;
+  --grid: #e1e0d9; --baseline: #c3c2b7; --ring: rgba(11,11,11,0.10);
+  --s-head: #2a78d6; --s-core: #1baf7a; --s-warn: #c26a1e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #0d0d0d; --surface: #1a1a19;
+    --ink: #ffffff; --ink-2: #c3c2b7; --muted: #898781;
+    --grid: #2c2c2a; --baseline: #383835; --ring: rgba(255,255,255,0.10);
+    --s-head: #3987e5; --s-core: #199e70; --s-warn: #d67f35;
+  }
+}
+* { box-sizing: border-box; }
+body { background: var(--page); color: var(--ink); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 0 20px 72px; }
+main { max-width: 880px; margin: 0 auto; }
+nav { max-width: 880px; margin: 0 auto; display: flex; align-items: baseline; gap: 22px; padding: 18px 0 14px; border-bottom: 1px solid var(--grid); font-size: 0.9rem; }
+nav .brand { font-weight: 700; margin-right: auto; color: var(--ink); }
+nav a { color: var(--ink-2); text-decoration: none; padding-bottom: 3px; }
+nav a:hover { color: var(--ink); }
+nav a.current { color: var(--ink); font-weight: 600; border-bottom: 2px solid var(--ink); }
+h1, h2 { font-family: Charter, Georgia, "Times New Roman", serif; text-wrap: balance; }
+h1 { font-size: 2.05rem; line-height: 1.15; margin: 40px 0 6px; font-weight: 700; }
+h2 { font-size: 1.3rem; margin: 44px 0 10px; font-weight: 700; }
+.eyebrow { text-transform: uppercase; letter-spacing: 0.09em; font-size: 0.72rem; color: var(--muted); margin-top: 40px; font-weight: 600; }
+.sub { color: var(--ink-2); max-width: 64ch; margin: 0 0 8px; }
+p { max-width: 68ch; }
+.meta { color: var(--muted); font-size: 0.85rem; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 22px 0; }
+.tile { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 18px; }
+.tile .k { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; }
+.tile .v { font-size: 1.7rem; font-weight: 700; margin-top: 2px; }
+.tile .d { font-size: 0.8rem; color: var(--ink-2); margin-top: 2px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 20px; font-size: 0.84rem; color: var(--ink-2); margin: 4px 0 10px; }
+.dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; }
+.dash { display: inline-block; width: 16px; height: 0; border-top: 2px dashed var(--muted); vertical-align: middle; margin-right: 7px; }
+figcaption { color: var(--muted); font-size: 0.82rem; margin-top: 8px; max-width: 68ch; }
+svg { display: block; width: 100%; height: auto; }
+svg text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.chartbox { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 14px 14px 8px; overflow-x: auto; margin: 18px 0 6px; }
+#tip { position: fixed; pointer-events: none; z-index: 10; display: none; background: var(--ink); color: var(--page); font-size: 0.78rem; line-height: 1.4; padding: 7px 10px; border-radius: 6px; max-width: 280px; font-variant-numeric: tabular-nums; }
+.footer { margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 0.8rem; max-width: 70ch; }
+a { color: inherit; }
+</style>
+
+<nav>
+  <span class="brand">Charlie's Financial Blog</span>
+  <a href="../index.html" class="current">Analysis Blog</a>
+  <a href="../posts.html">News Blog</a>
+</nav>
+
+<main>
+<p class="eyebrow">Analysis Blog · August 15, 2026 · Not investment advice</p>
+<h1>Federal Debt: Real Rates, Real Growth, and the Inflation Exit</h1>
+<p class="sub">A recent Money &amp; Macro video by economist Joeri Schasfoort argues that debt-to-GDP ratios do not predict government debt crises — real interest rates relative to real growth do. This note checks that argument against the academic literature and against the U.S. data, and then examines how the U.S. actually exited its last debt peak: through inflation.</p>
+<p class="meta">Data: FRED, Treasury Fiscal Data, CBO · Computed 2026-08-15 · Written 2026-08-15</p>
+
+<div class="tiles">
+  <div class="tile"><div class="k">Debt held by public</div><div class="v">101%</div><div class="d">of GDP, FY2026 (CBO); record is 106% in 1946</div></div>
+  <div class="tile"><div class="k">Avg. rate on the debt</div><div class="v">3.45%</div><div class="d">Treasury, July 2026 — ≈0% real at 3.4% inflation</div></div>
+  <div class="tile"><div class="k">10-yr TIPS real yield</div><div class="v">2.42%</div><div class="d">the marginal real rate, 2026-08-12</div></div>
+  <div class="tile"><div class="k">Net interest</div><div class="v">13.1%</div><div class="d">of federal outlays, FY2024 — exceeded defense</div></div>
+</div>
+
+<h2>The claim: ratios don't break governments, rising real rates do</h2>
+<p>The video's central claim is that there is no debt-to-GDP level at which governments fail. The recent defaults span a wide range of ratios: Greece defaulted in 2012 near 172% of GDP and Sri Lanka in 2022 near 114%, but Russia defaulted in 1998 near 75% and Argentina in 2001 near 65%, while Japan carries roughly 250% today without crisis. What the defaults shared was not a ratio but a spiral: real borrowing costs rising faster than revenue, so that new borrowing went increasingly to pay interest on old borrowing, until the government preferred default to borrowing at all.</p>
+<p>The academic literature supports each piece of this claim. Tomz and Wright (2007), examining sovereign defaults since 1820, found the link between hard times and default surprisingly weak — roughly 40% of defaults began while output was at or above trend. Mauro and Zhou (2020), using effective borrowing costs for 55 countries over up to 200 years, found that interest-growth differentials are "no higher prior to sovereign defaults than in normal times"; what moves before default is the <i>marginal</i> borrowing cost, which "often rise[s] abruptly and sharply, but just prior to default." The best-known claimed threshold — the 90% of GDP mark in Reinhart and Rogoff (2010) — did not survive replication (Herndon, Ash, and Pollin 2014). And Blanchard's 2019 AEA presidential address documented that safe interest rates below growth rates are the historical norm in the U.S., under which debt can be rolled over indefinitely without raising taxes.</p>
+
+<h2>Where U.S. debt stands</h2>
+<div class="chartbox"><div class="legend"><span><span class="dot" style="background:var(--s-head)"></span>Debt held by the public, % of GDP (fiscal years)</span><span><span class="dash"></span>CBO projection (Feb 2026)</span></div><div id="chart-debt"></div></div>
+<figcaption>Federal debt held by the public as a percent of GDP, 1939–2025 (FRED/OMB), with CBO's February 2026 baseline projection: 101% in 2026, passing the 1946 record of 106% around 2030, and reaching 120% by 2036. Hover for values.</figcaption>
+<p>The ratio itself is near its historical record. On the video's argument, that fact alone is not alarming — what matters is the price the government pays to carry it, relative to growth.</p>
+
+<h2>r versus g in the U.S. data</h2>
+<p>The standard sustainability test compares the real interest rate on the debt (r) to real economic growth (g). When r &lt; g, the debt ratio shrinks on its own under a balanced primary budget; when r &gt; g, stabilizing the ratio requires primary surpluses. The chart below computes the effective real rate the Treasury actually paid each year — net interest outlays divided by debt held by the public, minus CPI inflation — against real GDP growth, both as 5-year centered averages.</p>
+<div class="chartbox"><div class="legend"><span><span class="dot" style="background:var(--s-warn)"></span>Effective real rate paid on the debt (r)</span><span><span class="dot" style="background:var(--s-core)"></span>Real GDP growth (g)</span></div><div id="chart-rg"></div></div>
+<figcaption>Five-year centered averages, 1948–2022. r = fiscal-year net interest outlays ÷ average debt held by the public, minus CPI inflation; g = real GDP growth (FRED). The gap between the lines is the sustainability margin: green above orange means the debt ratio falls without primary surpluses.</figcaption>
+<p>Three episodes stand out. First, in 1946–1955 the real rate on the debt was deeply negative, which is how the wartime debt shrank (next section). Second, in roughly 1983–1998 the U.S. ran r &gt; g for fifteen years without any spiral — the gap was closed by deficit reduction that ended in the 1998–2001 surpluses. This is worth noting as a limit of the video's framing: for a reserve-currency country, r &gt; g starts a slow squeeze, not an explosion, and fiscal adjustment has resolved it before. Third, 2021–2024 shows r far below g again — inflation, not policy virtue.</p>
+<p>Where are we now? On the <i>average</i> rate, sustainability looks easy: the Treasury pays 3.45% on outstanding debt (July 2026) against 3.4% inflation — a real rate near zero, far below any plausible growth path. But the average rate is backward-looking; it reflects debt issued years ago at lower coupons. The <i>marginal</i> real rate — what new borrowing costs — is directly observable in the 10-year TIPS yield: 2.42% as of August 12. Professional forecasts put long-run real growth near 2%, so at the margin the U.S. is now borrowing at r &gt; g. This is precisely the configuration Mauro and Zhou warn about: the average looks fine while the margin deteriorates, and every year of refinancing pulls the average toward the margin.</p>
+
+<h2>The carrying cost is already historically high</h2>
+<div class="chartbox"><div class="legend"><span><span class="dot" style="background:var(--s-head)"></span>Net interest, % of federal outlays (fiscal years)</span></div><div id="chart-int"></div></div>
+<figcaption>Net interest outlays as a share of total federal outlays, 1941–2024 (FRED). The FY2024 share, 13.1%, is approaching the 1990s peak of 15.5% — reached at half of today's debt ratio and with the same warning tone in public debate.</figcaption>
+<p>In FY2024, net interest cost $880 billion — 13.1% of all federal outlays, and for the first time more than defense. The Committee for a Responsible Federal Budget projects that under either current or higher rates, net interest will pass Medicare spending by 2029. This is the mechanism by which the marginal rate becomes the average: roughly a third of the marketable debt matures within a year and must be refinanced at today's rates.</p>
+
+<h2>How the U.S. actually exited last time: inflation</h2>
+<p>The debt did not fall from its 1946 peak through repayment. Computing from the same series as the charts above: between 1946 and 1955, the effective real rate on federal debt averaged <b>−2.1% per year</b>, while cumulative CPI inflation ran 37%. The debt ratio fell from 106% of GDP to 53% in nine years, and to 22% by 1974. Reinhart and Sbrancia (2011) call this mechanism "financial repression": interest-rate caps and a captive regulated financial sector held nominal yields below inflation, and they estimate the resulting liquidation of U.S. and U.K. debt at <b>3 to 4 percent of GDP per year</b> on average over 1945–1980, with real rates negative roughly half the time.</p>
+<p>The same mechanism operated, briefly and without the capital controls, in 2021–2024. The effective real rate on the debt averaged −2.6% per year over those four fiscal years while cumulative inflation ran 21%. The result: debt held by the public stayed nearly flat, between 93% and 96% of GDP, through four years of trillion-plus deficits. Bondholders, not taxpayers, absorbed the difference.</p>
+<p>This is why the video's conclusion is that a U.S. debt crisis would probably not look like Venezuela or Greece. The U.S. borrows in its own currency and issues the reserve currency, so the pressure-release valve that history shows is a period of inflation persistently above target with nominal rates held below it — painful, gradual erosion rather than default. Britain after 1945 is the template.</p>
+
+<h2>Relevance to the portfolio question</h2>
+<p>None of this says a crisis is imminent; the current effective real rate near zero says the opposite for now. The forward-looking numbers are what changed: TIPS real yields above forecast growth, debt passing its 1946 record around 2030 on CBO's baseline, and interest costs compounding at the margin. For the stock/bond/cash question in this blog's <a href="../index.html">portfolio analyses</a>, the historical exit matters more than the crisis scenario: if high debt again resolves through years of above-target inflation with capped nominal yields, the cost falls on holders of long-term nominal bonds and on cash earning repressed rates, while TIPS carry an explicit 2.4% real yield today. That asymmetry is a fact about how the last exit was paid for, not a forecast; the 1990s showed that fiscal adjustment is also a possible exit.</p>
+
+<div class="footer">Sources: <a href="https://www.youtube.com/watch?v=ZbZfmNVFeE0">Money &amp; Macro, "Why the US isn't broke yet" (Aug 13, 2026)</a> · <a href="https://www.aeaweb.org/articles?id=10.1257/aer.109.4.1197">Blanchard (2019), "Public Debt and Low Interest Rates," AER</a> · <a href="https://www.imf.org/en/publications/wp/issues/2020/03/13/r-minus-g-negative-can-we-sleep-more-soundly-49068">Mauro &amp; Zhou (2020), "r−g&lt;0: Can We Sleep More Soundly?", IMF WP/20/52</a> · <a href="https://academic.oup.com/jeea/article-abstract/5/2-3/352/2295645">Tomz &amp; Wright (2007), "Do Countries Default in Bad Times?", JEEA</a> · <a href="https://www.nber.org/papers/w16893">Reinhart &amp; Sbrancia (2011), "The Liquidation of Government Debt," NBER w16893</a> · <a href="https://www.aeaweb.org/articles?id=10.1257/aer.100.2.573">Reinhart &amp; Rogoff (2010)</a> / <a href="https://academic.oup.com/cje/article/38/2/257/1714018">Herndon, Ash &amp; Pollin (2014)</a> · <a href="https://www.cbo.gov/publication/62105">CBO, The Budget and Economic Outlook: 2026 to 2036</a> · <a href="https://www.crfb.org/blogs/net-interest-costs-will-double-again-over-next-decade">CRFB on net interest</a> · <a href="https://fiscaldata.treasury.gov/datasets/average-interest-rates-treasury-securities/">Treasury average interest rates</a> · FRED series FYPUGDA188S, FYOINT, FYONET, GDPA, GDPCA, CPIAUCNS, DFII10. Written with Claude as a decision aid; not investment advice.</div>
+</main>
+<div id="tip"></div>
+
+<script>
+const D = {
+dy0: 1939,
+dpct: [44.3,41.6,37.3,40.9,62.9,82.3,103.2,106.3,89.9,78.8,78.6,73.0,61.8,58.5,56.1,57.5,53.3,49.4,46.3,47.0,45.0,43.7,42.4,41.1,39.8,37.5,35.1,32.4,31.0,30.8,27.3,26.4,26.0,25.2,23.9,22.2,23.4,25.5,26.4,25.8,24.4,24.9,24.6,27.7,31.3,32.4,34.7,38.0,38.9,39.2,38.8,40.4,43.7,46.0,47.4,47.1,47.2,46.3,44.0,41.1,37.7,33.3,31.4,32.4,34.2,35.2,35.2,35.0,34.8,39.3,52.1,59.9,64.9,69.4,71.0,72.6,71.7,75.3,74.8,76.2,78.0,98.3,93.9,93.1,94.3,96.2,98.1],
+proj: [[2026,101],[2030,106.3],[2036,120]],
+ry0: 1948,
+r5: [-4.17,-3.96,-1.46,-0.0,-0.25,0.01,1.3,1.14,0.78,0.71,0.52,0.72,1.23,1.64,1.73,1.78,1.54,1.43,1.01,0.43,-0.06,-0.02,0.09,-0.04,-0.8,-1.23,-1.3,-1.77,-1.88,-1.81,-2.4,-2.71,-1.82,-0.42,1.43,3.71,5.24,5.28,4.9,4.57,3.97,3.35,3.35,3.31,3.37,3.61,3.66,3.69,3.99,4.11,3.94,3.87,3.72,3.11,2.54,2.1,1.76,1.47,1.27,1.65,1.65,1.18,0.79,0.71,0.12,0.3,0.55,0.49,0.34,0.4,0.19,-0.52,-1.65,-1.89,-1.93],
+g5: [-0.1,3.83,4.88,4.99,4.99,4.67,3.49,3.1,2.01,3.51,2.6,2.69,3.49,4.51,4.28,5.06,5.87,5.19,5.3,4.77,3.51,2.85,3.35,3.5,2.77,2.69,3.11,2.98,2.96,3.7,3.69,3.12,1.84,1.65,2.46,3.34,3.53,4.58,4.5,3.79,3.33,2.62,2.63,2.34,2.42,2.58,3.35,3.54,3.88,4.04,4.31,3.75,3.2,2.86,2.68,2.56,2.92,2.98,2.45,1.16,1.0,0.76,0.82,1.22,2.24,2.29,2.34,2.37,2.54,2.55,1.55,2.42,2.43,2.42,2.46],
+iy0: 1941,
+ish: [6.91,2.99,1.95,2.43,3.36,7.44,12.19,14.58,11.65,11.31,10.25,6.95,6.78,6.79,7.09,7.19,6.99,6.8,6.26,7.54,6.87,6.45,6.95,6.92,7.27,6.98,6.52,6.23,6.92,7.35,7.06,6.71,7.06,7.96,6.99,7.19,7.31,7.73,8.46,8.89,10.14,11.4,11.11,13.04,13.68,13.73,13.81,14.26,14.77,14.71,14.68,14.43,14.1,13.88,15.31,15.45,15.24,14.59,13.5,12.46,11.07,8.5,7.09,6.99,7.44,8.53,8.69,8.47,5.31,5.68,6.38,6.25,6.39,6.53,6.05,6.23,6.59,7.91,8.44,5.3,5.17,7.59,10.74,13.06]
+};
+const tip = document.getElementById('tip');
+function showTip(evt, html) {
+  tip.innerHTML = html; tip.style.display = 'block';
+  const pad = 14, w = tip.offsetWidth;
+  let x = evt.clientX + pad; if (x + w > innerWidth - 8) x = evt.clientX - w - pad;
+  tip.style.left = x + 'px'; tip.style.top = Math.max(8, evt.clientY - 14) + 'px';
+}
+function hideTip() { tip.style.display = 'none'; }
+function el(tag, attrs, parent) {
+  const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e); return e;
+}
+function lineChart(divId, opts) {
+  const W = 840, H = opts.H || 320, m = { t: 16, r: 24, b: 30, l: 46 };
+  const X = yr => m.l + (W - m.l - m.r) * (yr - opts.x0) / (opts.x1 - opts.x0);
+  const Y = v => m.t + (H - m.t - m.b) * (1 - (v - opts.ymin) / (opts.ymax - opts.ymin));
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': opts.label });
+  for (const v of opts.ticks) {
+    el('line', { x1: m.l, x2: W - m.r, y1: Y(v), y2: Y(v), stroke: v === 0 ? 'var(--baseline)' : 'var(--grid)' }, svg);
+    el('text', { x: m.l - 8, y: Y(v) + 4, 'text-anchor': 'end', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = v + '%';
+  }
+  for (let yr = Math.ceil(opts.x0 / 10) * 10; yr <= opts.x1; yr += 10) {
+    el('text', { x: X(yr), y: H - 8, 'text-anchor': 'middle', 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = yr;
+  }
+  for (const s of opts.series) {
+    const pts = s.data.map((v, i) => `${X(s.x0 + i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+    el('polyline', { points: pts, fill: 'none', stroke: s.color, 'stroke-width': 2, 'stroke-linejoin': 'round', 'stroke-dasharray': s.dash || 'none' }, svg);
+  }
+  if (opts.extra) opts.extra(svg, X, Y);
+  const hit = el('rect', { x: m.l, y: m.t, width: W - m.l - m.r, height: H - m.t - m.b, fill: 'transparent' }, svg);
+  hit.addEventListener('mousemove', evt => {
+    const r = svg.getBoundingClientRect();
+    const yr = Math.round(opts.x0 + (opts.x1 - opts.x0) * ((evt.clientX - r.left) * W / r.width - m.l) / (W - m.l - m.r));
+    const html = opts.tipFor(yr);
+    if (html) showTip(evt, html); else hideTip();
+  });
+  hit.addEventListener('mouseleave', hideTip);
+  document.getElementById(divId).appendChild(svg);
+}
+
+/* Debt/GDP with CBO projection */
+lineChart('chart-debt', {
+  x0: 1939, x1: 2036, ymin: 0, ymax: 130, ticks: [0, 20, 40, 60, 80, 100, 120],
+  label: 'US federal debt held by the public as percent of GDP, 1939 to 2025, with CBO projection to 2036',
+  series: [
+    { x0: 1939, data: D.dpct, color: 'var(--s-head)' },
+  ],
+  extra: (svg, X, Y) => {
+    const pr = [[2025, D.dpct[D.dpct.length - 1]]].concat(D.proj);
+    el('polyline', { points: pr.map(p => `${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(' '), fill: 'none', stroke: 'var(--muted)', 'stroke-width': 2, 'stroke-dasharray': '4 5' }, svg);
+    el('line', { x1: X(1939), x2: X(2036), y1: Y(106.3), y2: Y(106.3), stroke: 'var(--baseline)', 'stroke-dasharray': '2 6' }, svg);
+    el('text', { x: X(1948), y: Y(106.3) - 6, 'font-size': 11, fill: 'var(--muted)' }, svg).textContent = '1946 record: 106%';
+    el('text', { x: X(2036) - 4, y: Y(120) - 8, 'text-anchor': 'end', 'font-size': 11.5, 'font-weight': 600, fill: 'var(--muted)' }, svg).textContent = '120%';
+  },
+  tipFor: yr => {
+    if (yr >= 1939 && yr <= 2025) return `<b>FY${yr}</b><br>Debt/GDP ${D.dpct[yr - 1939].toFixed(1)}%`;
+    const p = D.proj.find(p => p[0] === yr);
+    return p ? `<b>FY${yr}</b><br>CBO projection ${p[1].toFixed(0)}%` : null;
+  }
+});
+
+/* r vs g */
+lineChart('chart-rg', {
+  x0: 1948, x1: 2026, ymin: -5, ymax: 6.5, ticks: [-4, -2, 0, 2, 4, 6], H: 320,
+  label: 'Effective real interest rate on US federal debt versus real GDP growth, five-year averages, 1948 to 2022',
+  series: [
+    { x0: 1948, data: D.r5, color: 'var(--s-warn)' },
+    { x0: 1948, data: D.g5, color: 'var(--s-core)' },
+  ],
+  extra: (svg, X, Y) => {
+    el('circle', { cx: X(2026), cy: Y(0.05), r: 4.5, fill: 'var(--s-warn)', stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+    el('text', { x: X(2026) - 8, y: Y(0.05) + 16, 'text-anchor': 'end', 'font-size': 11, 'font-weight': 600, fill: 'var(--s-warn)' }, svg).textContent = 'avg. rate today ≈0% real';
+    el('circle', { cx: X(2026), cy: Y(2.42), r: 4.5, fill: 'var(--surface)', stroke: 'var(--s-warn)', 'stroke-width': 2 }, svg);
+    el('text', { x: X(2026) - 8, y: Y(2.42) - 8, 'text-anchor': 'end', 'font-size': 11, 'font-weight': 600, fill: 'var(--s-warn)' }, svg).textContent = 'marginal (10y TIPS) 2.42%';
+  },
+  tipFor: yr => {
+    const i = yr - 1948;
+    if (i >= 0 && i < D.r5.length) return `<b>${yr}</b> (5-yr avg)<br>r ${D.r5[i].toFixed(1)}% · g ${D.g5[i].toFixed(1)}%`;
+    return null;
+  }
+});
+
+/* Interest share of outlays */
+lineChart('chart-int', {
+  x0: 1941, x1: 2024, ymin: 0, ymax: 17, ticks: [0, 5, 10, 15], H: 240,
+  label: 'US net interest outlays as a percent of total federal outlays, 1941 to 2024',
+  series: [{ x0: 1941, data: D.ish, color: 'var(--s-head)' }],
+  extra: (svg, X, Y) => {
+    el('circle', { cx: X(2024), cy: Y(13.06), r: 4.5, fill: 'var(--s-head)', stroke: 'var(--surface)', 'stroke-width': 2 }, svg);
+    el('text', { x: X(2024) - 8, y: Y(13.06) - 10, 'text-anchor': 'end', 'font-size': 11.5, 'font-weight': 600, fill: 'var(--s-head)' }, svg).textContent = '13.1%';
+  },
+  tipFor: yr => {
+    const i = yr - 1941;
+    if (i >= 0 && i < D.ish.length) return `<b>FY${yr}</b><br>Net interest ${D.ish[i].toFixed(1)}% of outlays`;
+    return null;
+  }
+});
+</script>
